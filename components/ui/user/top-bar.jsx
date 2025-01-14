@@ -1,11 +1,18 @@
 import { Clock, Mail, Phone } from 'lucide-react'
+import Image from 'next/image'
+import { Avatar } from '../avatar'
 
 export default function TopBar() {
   return (
     <div className="bg-[#FDB813] text-navy-900 py-2">
       <div className="container mx-auto px-4 flex flex-wrap justify-between items-center">
-        <div className="text-2xl font-bold mb-2 md:mb-0">
-          Shabsa
+        <div className="text-2xl flex items-center gap-3 font-bold mb-2 md:mb-0">
+          <span>
+            <Avatar >
+            <Image src={'/logo.jpeg'} alt=''  width={80} height={80} objectFit='rounded' />
+            </Avatar>
+          </span>
+          <span>Shabsa</span>
         </div>
         <div className="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-4 md:gap-8">
           <div className="flex items-center gap-2">
