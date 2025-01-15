@@ -52,9 +52,9 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <Button onClick={() => navigate('/login') } className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90">
+          {pathname !== '/login' && <Button className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90">
             <Link href={'/login'}>Login</Link>
-          </Button>
+          </Button>}
         </div>
       </nav>
     </header>
