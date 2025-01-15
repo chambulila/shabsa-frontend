@@ -12,17 +12,27 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Get In Touch</h3>
             <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 mt-1 text-[#FDB813]" />
-                <p>123 Street, New York, USA</p>
+              <div className="flex items-center gap-3">
+                <div className="">
+                  <MapPin className="h-5 w-5 mt-1 text-[#FDB813]" />
+                </div>
+                <div>
+                  <p>Dar es salaam, Tanzania </p>
+                  <p>(Ungindoni, Kigamboni)</p>
+                </div>
               </div>
-              <div className="flex items-start gap-3">
-                <Phone className="h-5 w-5 mt-1 text-[#FDB813]" />
-                <p>+012 345 67890</p>
+              <div className="flex items-center gap-3">
+                <div>
+                  <Phone className="h-5 w-5 mt-1 text-[#FDB813]" />
+                </div>
+                <div>
+                  <p>+255 753 160 229</p>
+                  <p>+255 714 119 105</p>
+                </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="h-5 w-5 mt-1 text-[#FDB813]" />
-                <p>info@example.com</p>
+                <p>info@shabsa.co.tz</p>
               </div>
             </div>
             <div className="flex gap-2 mt-4">
@@ -49,7 +59,7 @@ export default function Footer() {
                 <Link href="/" className="hover:text-[#FDB813]">Home</Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#FDB813]">About Us</Link>
+                <Link href="/about-us" className="hover:text-[#FDB813]">About Us</Link>
               </li>
               <li>
                 <Link href="/service" className="hover:text-[#FDB813]">Our Services</Link>
@@ -69,8 +79,8 @@ export default function Footer() {
             <p className="mb-4">Stay updated with our latest news and announcements.</p>
             <div className="flex gap-2">
               <Input
-                type="email" 
-                placeholder="Your email" 
+                type="email"
+                placeholder="Your email"
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               />
               <Button className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90">

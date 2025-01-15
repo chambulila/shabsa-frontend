@@ -26,14 +26,14 @@ export default function TopBar() {
             <Phone className="h-5 w-5" />
             <div>
               <div className="text-sm font-medium">Call Us</div>
-              <div className="text-sm">+012 345 6789</div>
+              <div className="text-sm">+255 753 160 229</div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Mail className="h-5 w-5" />
             <div>
               <div className="text-sm font-medium">Email Us</div>
-              <div className="text-sm">info@example.com</div>
+              <div className="text-sm">info@shabsa.co.tz</div>
             </div>
           </div>
         </div>

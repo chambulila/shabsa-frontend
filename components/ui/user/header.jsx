@@ -5,20 +5,20 @@ import Link from 'next/link'
 import { Menu } from 'lucide-react'
 import { Button } from '../button2'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../dropdown-menu'
-
-const navigation = [
-  { name: 'HOME', href: '/' },
-  { name: 'ABOUT', href: '/about' },
-  { name: 'SERVICE', href: '/service' },
-  { name: 'TEAM', href: '/team' },
-  { name: 'PROJECTS', href: '/project' },
-  { name: 'PAGES', href: '/pages' },
-  { name: 'CONTACT', href: '/contact' },
-]
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
-  const [isOpen, setIsOpen] = React.useState(false)
-
+  const [isOpen, setIsOpen] = React.useState(false);
+  const pathname = usePathname();
+  const navigation = [
+    { name: 'HOME', href: '/', isActive: pathname === '/' },
+    { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
+    { name: 'SERVICE', href: '/service', isActive: pathname === '/service' },
+    { name: 'TEAM', href: '/team', isActive: pathname === '/team' },
+    { name: 'PROJECTS', href: '/project', isActive: pathname === '/projects' },
+    { name: 'PAGES', href: '/pages', isActive: pathname === '/pages' },
+    { name: 'CONTACT', href: '/contact', isActive: pathname === '/contact' },
+  ]
   return (
     <header className="bg-[#030f27] text-white sticky top-0 z-50">
       <nav className="container mx-auto px-4" aria-label="Top">
@@ -28,8 +28,9 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium hover:text-[#FDB813] transition-colors"
-              >
+                className={`text-sm font-medium transition-colors ${
+                    link.isActive ? "text-[#FDB813]" : "hover:text-[#FDB813]"
+                  }`}              >
                 {link.name}
               </Link>
             ))}

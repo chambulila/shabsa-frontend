@@ -42,7 +42,7 @@ export default function Hero() {
               <h1 className="text-4xl md:text-6xl font-bold mb-8">
                 {slide.subtitle}
               </h1>
-              <Button 
+              <Button
                 size="lg" 
                 className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90"
               >
