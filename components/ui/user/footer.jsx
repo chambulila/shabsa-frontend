@@ -105,7 +105,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-white/10 mt-12 pt-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Shabsa. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {process.env.APP_NAME}. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
