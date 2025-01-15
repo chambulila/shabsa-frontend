@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import React from "react";
 
 const Login = () => {
@@ -9,6 +10,9 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  const  handleSubmit = () => {
+    redirect('/dashboard')
+  }
   return (
     <div className="my-[6rem] flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white shadow-xl rounded-lg flex flex-col md:flex-row w-full max-w-5xl overflow-hidden">
@@ -40,7 +44,6 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="email"
-                required
                 placeholder="admin@example.com"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
               />
@@ -58,7 +61,6 @@ const Login = () => {
                 type={passwordVisible ? "text" : "password"}
                 id="password"
                 name="password"
-                required
                 placeholder="••••••••"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
               />
@@ -73,7 +75,8 @@ const Login = () => {
 
             {/* Login Button */}
             <button
-              type="submit"
+            onClick={() => handleSubmit()}
+              type="button"
               className="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Login
