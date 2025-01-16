@@ -45,40 +45,48 @@ const AboutUs = () => {
                 </div>
             </div>
 
-            <div className="shadow-none  ">
-                <div className="h-16 text-gray-500 md:h-24 flex justify-center items-center text-5xl font-extrabold">MISSION & VISION</div>
-                <div className="flex gap-3 my-5 mb-5 mx-[8rem] text-gray-500 ">
-                    <Card>
+            <div className="flex flex-col text-center shadow-none">
+                {/* Header */}
+                <div className="h-16 md:h-24 text-gray-500 flex justify-center items-center text-3xl md:text-5xl font-extrabold">
+                    MISSION & VISION
+                </div>
+
+                {/* Cards Container */}
+                <div className="flex flex-col md:flex-row gap-5 md:gap-8 my-5 px-4 md:px-16 text-gray-500">
+                    {/* Mission Card */}
+                    <Card className="w-full md:w-1/2">
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <RocketIcon className="text-yellow-500" size={90} />
-                                <CardTitle className='text-3xl uppercase '>Mission</CardTitle>
-                                <div className="w-[50%] border-t border-gray-500 mx-10 mt-2"></div>
+                                <CardTitle className="text-xl md:text-3xl uppercase">Mission</CardTitle>
+                                <div className="w-[80%] border-t border-gray-500 mt-2"></div>
                             </div>
                         </CardHeader>
-                        <CardContent className="flex text-center ">
-                            <CardDescription className="font-bold ">
+                        <CardContent className="flex text-center">
+                            <CardDescription className="font-bold text-sm md:text-base">
                                 To bring satisfaction, confidence, and comfort to everyone by ensuring value for the expenditures made on our products.
                             </CardDescription>
                         </CardContent>
                     </Card>
 
-                    <Card>
+                    {/* Vision Card */}
+                    <Card className="w-full md:w-1/2">
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <LightbulbIcon className="text-yellow-500" size={90} />
-                                <CardTitle className='text-3xl uppercase '>Vision</CardTitle>
-                                <div className="w-[50%] border-t border-gray-500 mx-10 mt-2"></div>
+                                <CardTitle className="text-xl md:text-3xl uppercase">Vision</CardTitle>
+                                <div className="w-[80%] border-t border-gray-500 mt-2"></div>
                             </div>
                         </CardHeader>
-                        <CardContent className="flex text-center ">
-                            <CardDescription className="font-bold ">
+                        <CardContent className="flex text-center">
+                            <CardDescription className="font-bold text-sm md:text-base">
                                 To become a center of excellence in providing products and services of the highest quality and value to our customers.
                             </CardDescription>
                         </CardContent>
                     </Card>
                 </div>
             </div>
+
         </section>
     );
 };
