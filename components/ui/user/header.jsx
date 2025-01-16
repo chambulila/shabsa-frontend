@@ -11,11 +11,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
   const navigation = [
-    { name: 'HOME', href: '/', isActive: pathname === '/' },
+    { name: 'HOME', href: '/', isActive: pathname === '/home' },
     { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
-    { name: 'SERVICE', href: '/service', isActive: pathname === '/service' },
+    { name: 'SERVICE', href: '/services', isActive: pathname.startsWith('/services') },
     { name: 'TEAM', href: '/team', isActive: pathname === '/team' },
-    { name: 'PROJECTS', href: '/project', isActive: pathname === '/projects' },
+    { name: 'PROJECTS', href: '/projects', isActive: pathname === '/projects' },
     { name: 'PAGES', href: '/pages', isActive: pathname === '/pages' },
     { name: 'CONTACT', href: '/contact', isActive: pathname === '/contact' },
   ]
