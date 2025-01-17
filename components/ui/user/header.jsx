@@ -14,10 +14,10 @@ export default function Header() {
     { name: 'HOME', href: '/', isActive: pathname === '/home' },
     { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
     { name: 'SERVICE', href: '/services', isActive: pathname.startsWith('/services') },
-    { name: 'TEAM', href: '/team', isActive: pathname === '/team' },
+    { name: 'TEAM', href: '#', isActive: pathname === '/team' },
     { name: 'PRODUCTS', href: '/products', isActive: pathname === '/products' },
-    { name: 'PAGES', href: '/pages', isActive: pathname === '/pages' },
-    { name: 'CONTACT', href: '/contact', isActive: pathname === '/contact' },
+    { name: 'PAGES', href: '#', isActive: pathname === '/pages' },
+    { name: 'CONTACT US', href: '/contact-us', isActive: pathname === '/contact-us' },
   ]
   return (
     <header className="bg-[#030f27] text-white sticky top-0 z-50">

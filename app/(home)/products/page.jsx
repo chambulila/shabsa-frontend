@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import { ShoppingCart } from 'lucide-react'; // Import shopping cart icon
+import { ShoppingBasket, ShoppingCart } from 'lucide-react'; // Import shopping cart icon
 import { Button } from '@/components/ui/button';
 import { products } from '@/utils/localDb';
 
@@ -11,7 +11,6 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -78,7 +77,7 @@ const ProductCard = ({ product }) => {
                             Add To Cart
                         </Button>
                         <Button onClick={() => setOpen(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <ShoppingCart className="h-4 w-4 inline-block mr-1" />
+                            <ShoppingBasket className="h-4 w-4 inline-block mr-1" />
                             Order Now
                         </Button>
                     </div>
