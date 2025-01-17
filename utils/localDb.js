@@ -54,3 +54,55 @@ export const services = [
         ],
     },
 ];
+
+export const products = [
+    {
+      name: "Ella - Multipurpose Shopify Theme OS 2.0",
+      author: "halothemes",
+      category: "Fashion",
+      price: "90, 000",
+      image: "/products/white1.png", // Replace with your image paths
+      bestSeller: true,
+    },
+    {
+      name: "Kalles - Clean, Versatile, Responsive Shop...",
+      author: "The4",
+      category: "Fashion",
+      price: "34, 000",
+      image: "/products/white3.png",
+      bestSeller: false,
+    },
+    {
+      name: "Glozin - Multipurpose Shopify Theme OS 2.0",
+      author: "Next Sky",
+      category: "Fashion",
+      price: "45, 000",
+      image: "/products/white4.png",
+      bestSeller: false,
+    },
+    {
+      name: "Fastor - Multipurpose Shopify Theme",
+      author: "roartheme",
+      category: "Electronics",
+      price: "50, 000",
+      image: "/products/white6.png",
+      bestSeller: true,
+    },
+    {
+      name: "Wokiee - Ecommerce Shopify Theme",
+      author: "p-themes",
+      category: "Lifestyle",
+      price: "75, 000",
+      image: "/products/white5.png",
+      bestSeller: true,
+    },
+    {
+      name: "Minimog - Shopify OS 2.0 Theme",
+      author: "FoxKit",
+      category: "Beauty",
+      price: "40, 000",
+      image: "/products/white2.png",
+      bestSeller: false,
+    },
+  ];
+  

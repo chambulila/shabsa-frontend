@@ -15,7 +15,7 @@ export default function Header() {
     { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
     { name: 'SERVICE', href: '/services', isActive: pathname.startsWith('/services') },
     { name: 'TEAM', href: '/team', isActive: pathname === '/team' },
-    { name: 'PROJECTS', href: '/projects', isActive: pathname === '/projects' },
+    { name: 'PRODUCTS', href: '/products', isActive: pathname === '/products' },
     { name: 'PAGES', href: '/pages', isActive: pathname === '/pages' },
     { name: 'CONTACT', href: '/contact', isActive: pathname === '/contact' },
   ]
