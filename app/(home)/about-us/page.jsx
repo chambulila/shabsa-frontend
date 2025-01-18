@@ -54,7 +54,7 @@ const AboutUs = () => {
                 {/* Cards Container */}
                 <div className="flex flex-col md:flex-row gap-5 md:gap-8 my-5 px-4 md:px-16 text-gray-500">
                     {/* Mission Card */}
-                    <Card className="w-full md:w-1/2">
+                    <Card className="w-full hover:scale-105 transition duration-500 hover:shadow-md md:w-1/2">
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <RocketIcon className="text-yellow-500" size={90} />
@@ -70,7 +70,7 @@ const AboutUs = () => {
                     </Card>
 
                     {/* Vision Card */}
-                    <Card className="w-full md:w-1/2">
+                    <Card className="w-full hover:scale-105 transition duration-500 hover:shadow-md md:w-1/2">
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <LightbulbIcon className="text-yellow-500" size={90} />
