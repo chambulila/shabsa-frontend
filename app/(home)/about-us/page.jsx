@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const AboutUs = () => {
     return (
-        <section className="relative bg-gray-100">
+        <section className="relative ">
             {/* Yellow bar */}
-            <div className="bg-yellow-500 h-16 md:h-24 flex justify-center items-center text-5xl font-extrabold">About Us</div>
+            <div className=" h-16 md:h-24 flex justify-center items-center text-5xl font-extrabold">About Us</div>
 
             {/* Main content */}
-            <div className="relative bg-white">
+            <div className="relative ">
                 <div className="container mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-12 px-6 py-12">
                     {/* Left Image */}
                     <div className="relative flex-shrink-0 w-full md:w-1/2 h-64 md:h-auto">
@@ -29,10 +29,10 @@ const AboutUs = () => {
                         <h2 className="text-sm text-yellow-500 font-medium uppercase">
                             Welcome to Shabsa
                         </h2>
-                        <h1 className="text-4xl text-gray-600 text-start md:text-5xl font-bold mt-2 leading-tight">
+                        <h1 className="text-4xl text-gray-300 text-start md:text-5xl font-bold mt-2 leading-tight">
                             More Than 10 Years Of Experience
                         </h1>
-                        <p className="text-gray-500 mt-4 font-semibold font-sans">
+                        <p className="text-gray-400 mt-4 font-semibold ">
                             We have a liability to improve on how to serve customers in a good and high-quality building material products from different corners of the world to the full satisfaction, confident, and compatibility of our customers.
                             <br /> <br />
                             The company products range covers tiles of both designs, ceramics, and marbles with the different sizes.
@@ -47,7 +47,7 @@ const AboutUs = () => {
 
             <div className="flex flex-col text-center shadow-none">
                 {/* Header */}
-                <div className="h-16 md:h-24 text-gray-500 flex justify-center items-center text-3xl md:text-5xl font-extrabold">
+                <div className="h-16 md:h-24 text-white flex justify-center items-center text-3xl md:text-5xl font-extrabold">
                     MISSION & VISION
                 </div>
 

@@ -25,11 +25,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <TopBar />
-        <Header />
-        {children}
-        <Footer />      
-        </body>
+        <div className="bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white min-h-screen"> {/* Gradient background */}
+
+          <TopBar />
+          <Header />
+          {children}
+        </div>
+        <Footer />
+
+      </body>
     </html>
   );
 }

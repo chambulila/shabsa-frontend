@@ -10,11 +10,13 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const  handleSubmit = () => {
+  const handleSubmit = () => {
     redirect('/dashboard')
   }
   return (
-    <div className="my-[6rem] flex items-center justify-center bg-gray-100 px-4">
+    <div className="my-[6rem] w-full">
+                  <h2 className="text-3xl md:text-4xl font-bold  mb-4  text-center">Login Into Account</h2>
+      <div className=" flex items-center justify-center  px-4">
       <div className="bg-white shadow-xl rounded-lg flex flex-col md:flex-row w-full max-w-5xl overflow-hidden">
         {/* Left Image Section */}
         <div className="w-full md:w-1/2 relative">
@@ -75,7 +77,7 @@ const Login = () => {
 
             {/* Login Button */}
             <button
-            onClick={() => handleSubmit()}
+              onClick={() => handleSubmit()}
               type="button"
               className="w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
@@ -84,6 +86,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 
 const ContactUs = () => {
     return (
-        <div className="bg-gray-800 text-white min-h-screen py-16 px-4 md:px-8 lg:px-16">
+        <div className=" text-white min-h-screen py-16 px-4 md:px-8 lg:px-16">
             <h2 className="text-3xl md:text-4xl font-bold  lg:mb-8 text-center">Contact Us</h2>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">

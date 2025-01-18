@@ -4,7 +4,7 @@ import { Avatar } from '../avatar'
 
 export default function TopBar() {
   return (
-    <div className="bg-[#FDB813] text-navy-900 py-2">
+    <div className="bg-[#ad8320] text-navy-900  text-black py-2">
       <div className="container mx-auto px-4 flex flex-wrap justify-between items-center">
         <div className="text-2xl flex items-center gap-3 font-bold mb-2 md:mb-0">
           <span>
