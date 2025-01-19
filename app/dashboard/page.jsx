@@ -1,3 +1,4 @@
+"use client"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -13,8 +14,16 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { redirect } from "next/navigation"
+import { useEffect } from "react"
 
 export default function Page() {
+  const localtoken = localStorage.getItem('token');
+  useEffect(() => {
+    if (!localtoken) {
+      redirect("/login");
+    }
+  }, localtoken)
   return (
     <SidebarProvider>
       <AppSidebar />
