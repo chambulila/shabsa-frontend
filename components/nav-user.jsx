@@ -40,7 +40,7 @@ export function NavUser({
     logout();
   }
   return (
-    <SidebarMenu>
+    <SidebarMenu >
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

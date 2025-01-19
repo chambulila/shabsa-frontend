@@ -5,6 +5,7 @@ import {
   BookOpen,
   Bot,
   BrainCog,
+  Home,
   Settings2,
   SquareTerminal,
 } from "lucide-react"
@@ -27,8 +28,14 @@ const data = {
   },
   navMain: [
     {
+      title: "Home",
+      url: "/dashboard",
+      icon: Home,
+      isActive: true,
+    },
+    {
       title: "Orders",
-      url: "#",
+      url: "/dashboard/orders",
       icon: SquareTerminal,
       isActive: true,
     },
@@ -58,7 +65,7 @@ const data = {
 
 export function AppSidebar({ ...props }) {
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar  collapsible="icon" {...props}>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
