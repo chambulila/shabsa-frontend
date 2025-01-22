@@ -9,7 +9,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/',
+        destination: '/home',
         permanent: false, // Set to true for a 301 redirect, or false for a 302 redirect
       },
     ];
