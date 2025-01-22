@@ -19,7 +19,7 @@ export default function TopBar() {
             <Clock className="h-5 w-5" />
             <div>
               <div className="text-sm font-medium">Opening Hour</div>
-              <div className="text-sm">Mon - Fri, 8:00 - 5:00</div>
+              <div className="text-sm">Mon - Fri, 8:00 AM - 5:00 PM</div>
             </div>
           </div>
           <div className="flex items-center gap-2">
