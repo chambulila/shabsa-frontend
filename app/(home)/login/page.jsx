@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const {login, user} = useAuth();
   const [loading, setLoading] = useState(false);
-  console.log("logged in: ", user)
+  
   const handleSubmit = async () => {
     const credentials = { email: email, password: password };
     setLoading(true);
@@ -27,9 +27,9 @@ const Login = () => {
     }
     }
 
-  if (localStorage.getItem('token')) {
-    redirect("/dashboard");
-  }
+  // if (localStorage.getItem('token')) {
+  //   redirect("/dashboard");
+  // }
   return (
     <div className="my-[6rem] w-full">
       <h2 className="text-3xl md:text-4xl font-bold  mb-4  text-center">Login Into Account</h2>

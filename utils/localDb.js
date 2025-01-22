@@ -106,3 +106,65 @@ export const products = [
     },
   ];
   
+  export const categories = [
+    { "id": 1, "name": "Electronics" },
+    { "id": 2, "name": "Clothing" },
+    { "id": 3, "name": "Books" }
+  ];
+
+  export const brands = [
+    { "id": 1, "name": "Apple" },
+    { "id": 2, "name": "Nike" },
+    { "id": 3, "name": "Samsung" }
+  ];
+
+  export const localProducts = [
+    {
+      "id": 1,
+      "name": "Common Projects Bball High",
+      "color": "White",
+      "price": 549,
+      "quantity": 2,
+      "image": "/common-projects.jpg" // Replace with your actual image path
+    },
+    {
+      "id": 2,
+      "name": "Maison Margiela Future Sneakers",
+      "color": "White",
+      "price": 870,
+      "quantity": 1,
+      "image": "/maison-margiela.jpg" // Replace with your actual image path
+    },
+    {
+      "id": 3,
+      "name": "Our Legacy Brushed Scarf",
+      "color": "Brown",
+      "price": 349,
+      "quantity": 1,
+      "image": "/our-legacy.jpg" // Replace with your actual image path
+    },
+    {
+      "id": 4,
+      "name": "Another Product Name",
+      "color": "Black",
+      "price": 199,
+      "quantity": 3,
+      "image": "/another-product.jpg" // Replace with your actual image path
+    },
+      {
+      "id": 5,
+      "name": "Sample Product Name",
+      "color": "Blue",
+      "price": 299,
+      "quantity": 1,
+      "image": "/sample-product.jpg" // Replace with your actual image path
+    },
+      {
+      "id": 6,
+      "name": "Example Product Name",
+      "color": "Red",
+      "price": 399,
+      "quantity": 2,
+      "image": "/example-product.jpg" // Replace with your actual image path
+    },
+  ];

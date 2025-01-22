@@ -6,24 +6,23 @@ import { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const localUser = localStorage.getItem('user')
+  const localUser = "localStorage.getItem('user')";
   const [user, setUser] = useState(null);
-  const localToken = localStorage.getItem('token');
+  // const localToken = localStorage.getItem('token');
 
   const login = async (credentials) => {
     if (localToken) {
       redirect('/dashboard');
     } else {
       const response = await authService.login(credentials)
-      localStorage.setItem('token', response.data?.token);
-      localStorage.setItem('user', response.data?.user);
+      // localStorage.setItem('token', response.data?.token);
       setUser(response?.data?.user);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
     setUser(null);
     redirect('/login');
   };

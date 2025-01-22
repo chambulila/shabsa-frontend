@@ -22,7 +22,7 @@ class AuthService {
   };
 
   async logout () {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
   };
 }
 export const authService = new AuthService

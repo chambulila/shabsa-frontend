@@ -41,17 +41,17 @@ const data = {
     },
     {
       title: "Products",
-      url: "#",
+      url: "/dashboard/products",
       icon: Bot,
     },
     {
       title: "Categories",
-      url: "#",
+      url: "/dashboard/categories",
       icon: BookOpen,
     },
     {
       title: "Brands",
-      url: "#",
+      url: "/dashboard/brands",
       icon: Settings2,
     },
     ,
