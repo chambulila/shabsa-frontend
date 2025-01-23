@@ -1,4 +1,4 @@
-# Stage 1: Build the Next.js application
+# Build stage
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -6,26 +6,26 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (excluding devDependencies)
-RUN npm install --omit=dev
+# Install dependencies
+RUN npm install
 
-# Copy all source files
+# Copy project files
 COPY . .
 
 # Build the application
 RUN npm run build
 
-# Stage 2: Serve using Nginx
+# Production stage
 FROM nginx:alpine
 
-# Copy built assets from builder
+# Copy built static files from builder stage
 COPY --from=builder /app/out /usr/share/nginx/html
 
-# Copy Nginx configuration
+# Copy custom Nginx configuration if needed
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 3096
-EXPOSE 3096
+# Expose port 80
+EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
