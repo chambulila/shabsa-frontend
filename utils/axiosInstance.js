@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from "js-cookie";
 
 const api = axios.create({
-  baseURL: `${process.env.APP_URL}/api`,
+  baseURL: `${process.env.API_URL}/api`,
   //  'http://localhost:8000/api', // Laravel backend URL
   headers: {
     'Content-Type': 'application/json',
