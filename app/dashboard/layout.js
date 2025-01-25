@@ -17,10 +17,10 @@ import {
 import { redirect } from "next/navigation"
 
 export default function AdminLayout({children}) {
-  // const localtoken = localStorage.getItem('token');
-  //   if (!localtoken) {
-  //     redirect("/login");
-  //   }
+  const localtoken = localStorage.getItem('auth_token');
+    if (!localtoken) {
+      redirect("/login");
+    }
   return (
     <SidebarProvider>
       <AppSidebar />

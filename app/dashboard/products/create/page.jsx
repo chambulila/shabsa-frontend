@@ -66,10 +66,10 @@ const NewProduct = () => {
                     images: [],
                 })
             } else {
-                console.error('Error creating product:', response.status);
+                console.log('Error creating product:', response.status);
             }
         } catch (error) {
-            console.error('Error creating product:', error);
+            console.log('Error creating product:', error);
         }
     };
 

@@ -1,34 +1,32 @@
 "use client"
 import { authService } from '@/utils/authService';
 import { redirect } from 'next/navigation';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const localUser = "localStorage.getItem('user')";
-  const [user, setUser] = useState(null);
-  // const localToken = localStorage.getItem('token');
+  const localToken = localStorage.getItem('auth_token');
 
   const login = async (credentials) => {
     if (localToken) {
       redirect('/dashboard');
     } else {
       const response = await authService.login(credentials)
-      // localStorage.setItem('token', response.data?.token);
-      setUser(response?.data?.user);
+      localStorage.setItem('auth_token', response?.data?.token);
+      if(response?.data?.token) {
+        redirect('/dashboard');
+      }
     }
   };
 
   const logout = () => {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user');
-    setUser(null);
+    localStorage.removeItem('auth_token');
     redirect('/login');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,11 +1,11 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { redirect } from "next/navigation";
-import React, { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const Login = () => {
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -14,22 +14,28 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const {login, user} = useAuth();
   const [loading, setLoading] = useState(false);
-  
+  const authToken = localStorage.getItem('auth_token')
+  const router = useRouter();
+
+  useEffect(() => {
+    // Perform client-side check for auth_token and redirect if found
+    if (localStorage.getItem("auth_token")) {
+      router.push("/dashboard");
+    }
+  }, [router, authToken]);
+
   const handleSubmit = async () => {
     const credentials = { email: email, password: password };
     setLoading(true);
     try {
      await login(credentials);
     } catch (error) {
-      console.error("Login failed", error);
+      console.log("Login failed", error);
     } finally {
       setLoading(false);
     }
     }
 
-  // if (localStorage.getItem('token')) {
-  //   redirect("/dashboard");
-  // }
   return (
     <div className="my-[6rem] w-full">
       <h2 className="text-3xl md:text-4xl font-bold  mb-4  text-center">Login Into Account</h2>
