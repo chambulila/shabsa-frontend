@@ -1,32 +1,44 @@
-"use client"
+"use client";
 import { authService } from '@/utils/authService';
-import { redirect } from 'next/navigation';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const localToken = localStorage.getItem('auth_token');
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
+  const localToken = Cookies.get("auth_token");
   const login = async (credentials) => {
     if (localToken) {
-      redirect('/dashboard');
+      router.push('/dashboard'); // Redirect to dashboard if token exists
     } else {
-      const response = await authService.login(credentials)
-      localStorage.setItem('auth_token', response?.data?.token);
-      if(response?.data?.token) {
-        redirect('/dashboard');
+      try {
+        const response = await authService.login(credentials);
+        if (response?.data?.token) {
+          console.log(response?.data?.token)
+          // Store the auth_token in cookies
+          Cookies.set("auth_token", response.data.token, {
+            expires: 7, // 7 days
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Strict",
+          });
+          router.push('/dashboard'); // Redirect after successful login
+        }
+      } catch (error) {
+        console.log("Login failed", error);
       }
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('auth_token');
-    redirect('/login');
-  };
+  // if (loading) {
+  //   return "null"; // Optionally render a loading spinner while checking authentication
+  // }
 
   return (
-    <AuthContext.Provider value={{ login, logout }}>
+    <AuthContext.Provider value={{ login }}>
       {children}
     </AuthContext.Provider>
   );

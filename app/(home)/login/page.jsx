@@ -1,7 +1,8 @@
 "use client";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { redirect, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Login = () => {
@@ -12,18 +13,14 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login, user} = useAuth();
+  const {login} = useAuth();
   const [loading, setLoading] = useState(false);
-  const authToken = localStorage.getItem('auth_token')
-  const router = useRouter();
-
-  useEffect(() => {
-    // Perform client-side check for auth_token and redirect if found
-    if (localStorage.getItem("auth_token")) {
-      router.push("/dashboard");
-    }
-  }, [router, authToken]);
-
+  const localtoken = Cookies.get('auth_token');
+    useEffect(() => {
+      if (localtoken) {
+        redirect('/dashboard');
+      }
+    }, [])
   const handleSubmit = async () => {
     const credentials = { email: email, password: password };
     setLoading(true);

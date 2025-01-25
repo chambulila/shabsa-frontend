@@ -1,4 +1,6 @@
+import Cookies from "js-cookie";
 import api from "./axiosInstance";
+import { redirect } from "next/navigation";
 
 class AuthService {
   async login (credentials) {
@@ -21,8 +23,17 @@ class AuthService {
     }
   };
 
-  async logout () {
-    localStorage.removeItem('token');
-  };
+  async logout() {
+    try {
+     const response = await api.post("logout"); // Invalidate the session on the backend
+      // if(response?.data?.status == 200){
+        Cookies.remove("auth_token");
+        redirect('/login');
+      // }
+      return response;
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
 }
 export const authService = new AuthService

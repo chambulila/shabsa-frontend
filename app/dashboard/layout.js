@@ -14,10 +14,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import Cookies from "js-cookie"
 import { redirect } from "next/navigation"
 
 export default function AdminLayout({children}) {
-  const localtoken = localStorage.getItem('auth_token');
+  const localtoken = Cookies.get('auth_token');
     if (!localtoken) {
       redirect("/login");
     }

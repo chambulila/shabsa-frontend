@@ -1,17 +1,14 @@
-import axiosInstance from '@/utils/axiosInstance';
-import { NextResponse } from 'next/server';
+// import axiosInstance from '@/utils/axiosInstance';
+// import Cookies from 'js-cookie';
+// import { NextResponse } from 'next/server';
 
-export async function middleware(req) {
-  const token = req.cookies['XSRF-TOKEN']; // Adjust to match your cookie name
+// export async function middleware(req) {
+//   // const token = req.cookies['XSRF-TOKEN']; // Adjust to match your cookie name
+//   const token = Cookies.get("auth_token");
 
-  if (!token) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
+//   if (!token) {
+//     return NextResponse.redirect(new URL('/login', req.url));
+//   }
 
-  try {
-    await axiosInstance.get('/user');
-    return NextResponse.next();
-  } catch (error) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
-}
+//     return NextResponse.next();
+// }
