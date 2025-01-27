@@ -16,9 +16,9 @@ export default function Header() {
     { name: 'HOME', href: '/home', isActive: pathname === '/home' },
     { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
     { name: 'SERVICE', href: '/services', isActive: pathname.startsWith('/services') },
-    { name: 'TEAM', href: '#', isActive: pathname === '/team' },
+    // { name: 'TEAM', href: '#', isActive: pathname === '/team' },
     { name: 'PRODUCTS', href: '/products', isActive: pathname === '/products' },
-    { name: 'PAGES', href: '#', isActive: pathname === '/pages' },
+    // { name: 'PAGES', href: '#', isActive: pathname === '/pages' },
     { name: 'CONTACT US', href: '/contact-us', isActive: pathname === '/contact-us' },
   ]
   return (
@@ -60,7 +60,7 @@ export default function Header() {
             <div className="relative cursor-pointer" onClick={() => setIsCartOpen(true)}>
               <ShoppingCart className="h-6 w-6" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
-                {'6'}
+                {'0'}
               </span>
             </div>
 

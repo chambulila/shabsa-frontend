@@ -5,17 +5,32 @@ const slides = [
   {
     title: "We Are Professional",
     subtitle: "For Your Dream Project",
-    image: "https://sjc.microlink.io/tHzXHVMUv8fVug0Bi8AAtn0t8kRp1mwJkpFQ1VpWmJ3-8MHMzQe2Eaw8wQrXETSW30G_1w-E7eK-g0tNclxMeA.jpeg"
+    image: "/home/tiles7.jpg"
   },
   {
     title: "Professional Builders",
     subtitle: "We Build Your Home",
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/home/tiles2.jpg?height=600&width=1200"
+  },
+  {
+    title: "Professional Builders",
+    subtitle: "Let Us Make Your Home Beauty",
+    image: "/home/tiles3.jpeg?height=600&width=1200"
+  },
+  {
+    title: "Professional Builders",
+    subtitle: "We Build Your Home",
+    image: "/home/tiles4.jpg"
   },
   {
     title: "Expert Construction",
     subtitle: "30 Years of Experience",
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/home/tiles1.webp?height=600&width=1200"
+  },
+  {
+    title: "Expert Construction",
+    subtitle: "30 Years of Experience",
+    image: "/home/tiles5.webp?height=600&width=1200"
   }
 ]
 
@@ -46,7 +61,7 @@ export default function Hero() {
                 size="lg" 
                 className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90"
               >
-                GET A QUOTE
+                LEARN MORE ABOUT US
               </Button>
             </div>
           </div>

@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button"
 
 const ContactUs = () => {
     return (
-        <div className=" text-white min-h-screen py-16 px-4 md:px-8 lg:px-16">
-            <h2 className="text-3xl md:text-4xl font-bold  lg:mb-8 text-center">Contact Us</h2>
+        <div className=" min-h-screen px-4 md:px-8 lg:px-16">
+            <h2 className="text-3xl md:text-4xl font-bold  mt-4 text-center">Contact Us</h2>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
                 {/* Contact Information */}
                 <div className="space-y-6">
                     <h2 className="text-3xl font-bold">Get In Touch</h2>
-                    <p className="text-gray-300">
+                    <p className="">
                         We value your feedback and are committed to providing excellent customer service. If you have any questions, comments, or concerns, 1  please don't hesitate to contact us. 2  We're here to help and will respond to your inquiry as soon as possible.
                     </p>
                     <div className="space-y-4">
@@ -22,7 +22,7 @@ const ContactUs = () => {
                             <MapPin className="h-6 w-6 text-blue-400" />
                             <div>
                                 <p className="font-medium">Address</p>
-                                <p className="text-gray-300">
+                                <p className="">
                                     Dar es salaam, Tanzania. <br />
                                     (Ungindoni, Kigamboni)
                                 </p>
@@ -32,15 +32,15 @@ const ContactUs = () => {
                             <Phone className="h-6 w-6 text-blue-400" />
                             <div>
                                 <p className="font-medium">Phone</p>
-                                <p className="text-gray-300">+255 753 160 229</p>
-                                <p className="text-gray-300">+255 714 119 105</p>
+                                <p className="">+255 753 160 229</p>
+                                <p className="">+255 714 119 105</p>
                             </div>
                         </div>
                         <div className="flex items-center space-x-2">
                             <Mail className="h-6 w-6 text-blue-400" />
                             <div>
                                 <p className="font-medium">Email</p>
-                                <p className="text-gray-300">info@shabsa.co.tz</p>
+                                <p className="">info@shabsa.co.tz</p>
                             </div>
                         </div>
                     </div>

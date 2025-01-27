@@ -8,8 +8,8 @@ export default function TopBar() {
       <div className="container mx-auto px-4 flex flex-wrap justify-between items-center">
         <div className="text-2xl flex items-center gap-3 font-bold mb-2 md:mb-0">
           <span>
-            <Avatar >
-            <Image src={'/logo.jpeg'} alt=''  width={80} height={80} objectFit='rounded' />
+            <Avatar>
+            <Image src={'/logo1.png'} alt=''  width={150} height={100} className="bg-black" objectFit='rounded' />
             </Avatar>
           </span>
           <span>Shabsa</span>

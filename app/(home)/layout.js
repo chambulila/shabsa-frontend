@@ -27,7 +27,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-        <div className="bg-gradient-to-b from-yellow-900 via-gray-900 to-yellow-900 text-white min-h-screen"> {/* Gradient background */}
+        {/* <div className="bg-gradient-to-b from-yellow-900 via-gray-900 to-yellow-900 text-white min-h-screen"> */}
+        <div className="bg-white min-h-screen"> {/* Gradient background */}
           <TopBar />
           <Header />
           {children}

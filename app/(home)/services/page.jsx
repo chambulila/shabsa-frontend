@@ -11,16 +11,16 @@ import { truncateText } from "@/utils/constantsAndFuntions";
 const ServicesSection = () => {
   const router = useRouter();
     return (
-      <div className="container-fluid py-12 flex flex-col items-center">
+      <div className="container-fluid  pb-0 flex flex-col items-center">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Our Services</h2>
+        <h2 className="text-3xl md:text-4xl font-bold my-4 text-center">Our Services</h2>
         
         {/* Cards Container */}
-        <div className="w-full flex flex-wrap justify-center gap-6">
+        <div className="w-full flex flex-wrap justify-center mb-8 gap-6">
           {services.map((service) => (
             <Card
               key={service.title}
-              className="hover:scale-105 w-full sm:w-[90%] md:w-[45%] lg:w-[30%] gap-5 transition-transform mx-auto"
+              className="hover:scale-105 w-full sm:w-[90%] md:w-[45%] lg:w-[45%] gap-5 transition-transform mx-auto"
             >
               {/* Card Header */}
               <CardHeader className="flex flex-col items-center text-center">
