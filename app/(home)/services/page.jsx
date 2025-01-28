@@ -13,7 +13,7 @@ const ServicesSection = () => {
     return (
       <div className="container-fluid  pb-0 flex flex-col items-center">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-bold my-4 text-center">Our Services</h2>
+        <h2 className="text-3xl md:text-4xl font-bold my-8 text-center">Our Services</h2>
         
         {/* Cards Container */}
         <div className="w-full flex flex-wrap justify-center mb-8 gap-6">

@@ -6,7 +6,7 @@ const AboutUs = () => {
     return (
         <section className="relative ">
             {/* Yellow bar */}
-            <div className="  flex justify-center items-center my-4 text-gray-700 text-5xl font-extrabold">About Us</div>
+            <div className="  flex justify-center items-center my-8 text-gray-700 text-5xl font-extrabold">About Us</div>
 
             {/* Main content */}
             <div className="relative ">
@@ -27,7 +27,7 @@ const AboutUs = () => {
                     {/* Right Content */}
                     <div className="flex flex-col items-start md:w-1/2 text-center md:text-left">
                         <h2 className="text-sm text-yellow-800 font-medium uppercase">
-                            Welcome to Shabsa
+                            Welcome to Shabsa ceramic & general supply limited
                         </h2>
                         <h1 className="text-4xl text-gray-600 text-start md:text-5xl font-bold mt-2 leading-tight">
                             More Than 10 Years Of Experience
@@ -58,7 +58,7 @@ const AboutUs = () => {
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <RocketIcon className="text-yellow-500" size={90} />
-                                <CardTitle className="text-xl md:text-3xl uppercase">Mission</CardTitle>
+                                <CardTitle className="text-3xl md:text-4xl uppercase">Mission</CardTitle>
                                 <div className="w-[80%] border-t border-gray-500 mt-2"></div>
                             </div>
                         </CardHeader>
@@ -74,7 +74,7 @@ const AboutUs = () => {
                         <CardHeader>
                             <div className="flex flex-col items-center text-gray-500">
                                 <LightbulbIcon className="text-yellow-500" size={90} />
-                                <CardTitle className="text-xl md:text-3xl uppercase">Vision</CardTitle>
+                                <CardTitle className="text-3xl md:text-4xl uppercase">Vision</CardTitle>
                                 <div className="w-[80%] border-t border-gray-500 mt-2"></div>
                             </div>
                         </CardHeader>

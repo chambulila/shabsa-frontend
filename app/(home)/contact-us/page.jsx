@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 const ContactUs = () => {
     return (
         <div className=" min-h-screen px-4 md:px-8 lg:px-16">
-            <h2 className="text-3xl md:text-4xl font-bold  mt-4 text-center">Contact Us</h2>
+            <h2 className="text-3xl md:text-4xl font-bold  my-8 text-center">Contact Us</h2>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
                 {/* Contact Information */}

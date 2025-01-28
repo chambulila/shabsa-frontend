@@ -1,5 +1,7 @@
+"use client"
 import { Button } from '@/components/ui/button'
 import { Carousel } from '@/components/ui/corousel'
+import { useRouter } from 'next/navigation'
 
 const slides = [
   {
@@ -35,6 +37,7 @@ const slides = [
 ]
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <div className="h-[600px]">
       <Carousel>
@@ -58,6 +61,7 @@ export default function Hero() {
                 {slide.subtitle}
               </h1>
               <Button
+              onClick={() => router.push('/about-us')}
                 size="lg" 
                 className="bg-[#FDB813] text-[#030f27] hover:bg-[#FDB813]/90"
               >
