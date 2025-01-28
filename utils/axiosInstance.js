@@ -1,11 +1,12 @@
 import axios from 'axios';
 import Cookies from "js-cookie";
-
 const api = axios.create({
-  baseURL: `http://5.189.168.118:9109/api`,
-  //  'http://localhost:8000/api', // Laravel backend URL
+  // baseURL: `http://5.189.168.118:9109/api`,
+   baseURL: 'http://localhost:8000/api', // Laravel backend URL
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json',  
+    // 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+  
 },
 });
 

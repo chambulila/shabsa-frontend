@@ -33,12 +33,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+    async function logout () {
+      try {
+        await authService.logout();
+        router.push("/login"); // Redirect after successful logout
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    }
   // if (loading) {
   //   return "null"; // Optionally render a loading spinner while checking authentication
   // }
 
   return (
-    <AuthContext.Provider value={{ login }}>
+    <AuthContext.Provider value={{ login, logout }}>
       {children}
     </AuthContext.Provider>
   );

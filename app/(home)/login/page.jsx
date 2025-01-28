@@ -36,7 +36,7 @@ const Login = () => {
   return (
     <div className="my-[6rem] w-full">
       <h2 className="text-3xl md:text-4xl font-bold  mb-4  text-center">Login Into Account</h2>
-      <hr className="w-[15%] mx-auto mb-5" />
+      <hr className="w-[15%] mx-auto border-black mb-5" />
       <div className=" flex items-center justify-center  px-4">
         <div className="bg-white shadow-xl rounded-lg flex flex-col md:flex-row w-full max-w-5xl overflow-hidden">
           {/* Left Image Section */}

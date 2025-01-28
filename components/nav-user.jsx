@@ -29,15 +29,16 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { redirect } from "next/dist/server/api-utils"
 import { authService } from "@/utils/authService"
+import { redirect } from "next/navigation"
+import { useAuth } from "@/contexts/AuthContext"
 
-export function NavUser({
-  user,
-}) {
-  const { isMobile } = useSidebar()
-  function handleLogout () {
-    authService.logout();
+export function NavUser({user}) {
+  const { isMobile } = useSidebar();
+  const { logout } = useAuth();
+  
+  async function handleLogout () {
+    logout();
   }
   return (
     <SidebarMenu >
