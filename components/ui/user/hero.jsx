@@ -2,6 +2,9 @@
 import { Button } from '@/components/ui/button'
 import { Carousel } from '@/components/ui/corousel'
 import { useRouter } from 'next/navigation'
+import About from './About'
+import Services from './Services'
+import Contact from './Contact'
 
 const slides = [
   {
@@ -39,7 +42,7 @@ const slides = [
 export default function Hero() {
   const router = useRouter();
   return (
-    <div className="h-[600px]">
+    <div className="h-full">
       <Carousel>
         {slides.map((slide, index) => (
           <div key={index} className="relative h-[600px] flex items-center">
@@ -71,6 +74,10 @@ export default function Hero() {
           </div>
         ))}
       </Carousel>
+
+      <About />
+      <Services />
+      <Contact />
     </div>
   )
 }
