@@ -13,8 +13,8 @@ class BrandAndCategoryService {
         const response = await api.post('/brands', data);
         return response;
     }
-    async createCategory() {
-        const response = await api.post('/categories');
+    async createCategory(data) {
+        const response = await api.post('/categories', data);
         return response;
     }
     async updateBrand(brandId, data) {
