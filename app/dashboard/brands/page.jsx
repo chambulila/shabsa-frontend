@@ -1,10 +1,9 @@
 "use client"
 import CreateBrand from '@/components/brands/CreateBrand';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { brandAndCategoryService } from '@/services/brandAndCategoryService';
-import { DialogTitle } from '@radix-ui/react-dialog';
 import { Edit2Icon, Trash2Icon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 export default function page() {

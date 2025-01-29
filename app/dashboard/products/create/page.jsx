@@ -7,10 +7,15 @@ import { Button } from "@/components/ui/button"
 import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { brands, categories } from '@/utils/localDb';
+// import { brands, categories } from '@/utils/localDb';
 import { redirect } from 'next/navigation';
+import { productService } from '@/services/productService';
 
 const NewProduct = () => {
+    const [brands, setBrands] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [gettingMetas, setGettingMetas] = useState(false);
+
     const [product, setProduct] = useState({
         title: '',
         description: '',
@@ -21,6 +26,22 @@ const NewProduct = () => {
         images: [],
     });
 
+    const getBrandAndCategories = async () => {
+        setGettingMetas(true);
+        try {
+            const response = await productService.getBrandAndCategory();
+            setBrands(response?.data?.brands);
+            setCategories(response?.data?.categories);
+        } finally {
+            setGettingMetas(false);
+        }
+
+    }
+    useEffect(() => {
+        getBrandAndCategories();
+    }, [])
+
+    console.log(brands)
     const handleInputChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -36,7 +57,6 @@ const NewProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const formData = new FormData();
         for (const key in product) {
             if (key === 'images') {
@@ -49,10 +69,7 @@ const NewProduct = () => {
         }
 
         try {
-            const response = await fetch('/api/products', {
-                method: 'POST',
-                body: formData,
-            });
+            const response = await productService.createProduct(formData);
 
             if (response.ok) {
                 console.log('Product created successfully!');
@@ -100,11 +117,11 @@ const NewProduct = () => {
                         <Label htmlFor="category">Category</Label>
                         <Select onValueChange={(value) => setProduct({...product, category: value})}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a category" value={product.category}/>
+                                <SelectValue placeholder={gettingMetas ? 'Loading Categories' : 'Select a category'} value={product.category}/>
                             </SelectTrigger>
                             <SelectContent>
-                                {categories.map((category) => (
-                                    <SelectItem key={category.id} value={category.name}>{category.name}</SelectItem>
+                                {categories?.map((category) => (
+                                    <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
@@ -113,11 +130,11 @@ const NewProduct = () => {
                         <Label htmlFor="brand">Brand</Label>
                         <Select onValueChange={(value) => setProduct({...product, brand: value})}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a brand" value={product.brand}/>
+                                <SelectValue placeholder={gettingMetas ? 'Loading Brands' : 'Select a brand'} value={product.brand}/>
                             </SelectTrigger>
                             <SelectContent>
-                                {brands.map((brand) => (
-                                    <SelectItem key={brand.id} value={brand.name}>{brand.name}</SelectItem>
+                                {brands?.map((brand) => (
+                                    <SelectItem key={brand.id} value={brand.id}>{brand.name}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
