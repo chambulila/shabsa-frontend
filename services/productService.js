@@ -1,8 +1,8 @@
 import api from "@/utils/axiosInstance";
 
 class ProductService {
-    async getProducts() {
-        const response = await api.get('/products');
+    async getProducts(filters) {
+    const response = await api.get(`/products?${filters}`);
         return response;
     }
     async getProductById(productId) {

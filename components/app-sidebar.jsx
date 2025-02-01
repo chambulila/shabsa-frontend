@@ -55,11 +55,11 @@ const data = {
       icon: Settings2,
     },
     ,
-    {
-      title: "Settings",
-      url: "#",
-      icon: BrainCog,
-    },
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: BrainCog,
+    // },
   ],
 }
 

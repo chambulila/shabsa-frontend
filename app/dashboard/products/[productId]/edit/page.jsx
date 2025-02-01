@@ -8,25 +8,27 @@ import { X } from 'lucide-react';
 import Image from 'next/image';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { brands, categories } from '@/utils/localDb';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect, useParams, useRouter } from 'next/navigation';
 import { productService } from '@/services/productService';
 import SuneditorTextField from '@/components/ui/SuneditorTextField';
 
-const NewProduct = () => {
+const EditProduct = () => {
     const [brands, setBrands] = useState([]);
     const [categories, setCategories] = useState([]);
     const [gettingMetas, setGettingMetas] = useState(false);
+    const {productId} = useParams();
+    const [fetchedProduct, setFetchedProduct] = useState(null); //
     const router = useRouter();
     const [product, setProduct] = useState({
-        title: '',
-        description: '',
-        quantity: 0,
-        price: 0,
-        category: '',
-        brand: '',
-        images: [],
-    });
-
+        title: fetchedProduct?.name || "",
+        description: fetchedProduct?.description || "",
+        quantity: fetchedProduct?.quantity || 0,
+        price: fetchedProduct?.price || "",
+        category: fetchedProduct?.category_id || "",
+        brand: fetchedProduct?.brand_id || "",
+        images: fetchedProduct?.images || [],
+    })
+console.log(product)
     const getBrandAndCategories = async () => {
         setGettingMetas(true);
         try {
@@ -38,11 +40,17 @@ const NewProduct = () => {
         }
 
     }
+
+    const getProduct = async () => {
+        const response = await productService.getProductById(productId);
+        setFetchedProduct(response?.data?.product);
+    }
+
     useEffect(() => {
         getBrandAndCategories();
+        getProduct();
     }, [])
 
-    console.log(brands)
     const handleInputChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -147,7 +155,7 @@ const NewProduct = () => {
                 <div className="flex flex-wrap gap-4 mt-4">
                     {product.images.map((image, index) => (
                         <div key={index} className="relative w-32 h-32 border rounded">
-                            <Image src={URL.createObjectURL(image)} alt={`Preview ${index}`} fill style={{objectFit:"cover"}}/>
+                            <Image src={image.replace(/\\/g, '')} alt={`Preview ${index}`} fill style={{objectFit:"cover"}}/>
                             <button
                                 type="button"
                                 onClick={() => handleRemoveImage(index)}
@@ -167,4 +175,4 @@ const NewProduct = () => {
     );
 };
 
-export default NewProduct;
+export default EditProduct;
