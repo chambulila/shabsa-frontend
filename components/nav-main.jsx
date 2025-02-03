@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 import { Avatar } from "./ui/avatar"
-import { redirect } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import Link from "next/link"
 import { BrainCog } from "lucide-react"
 
 export function NavMain({ items }) {
+    const pathname = usePathname();
+
     return (
         <SidebarGroup>
             <div
@@ -32,8 +34,10 @@ export function NavMain({ items }) {
             </div>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
-                {items.map((item, index) => (
-                    <SidebarMenuItem key={index}>
+                {items.map((item, index) => {
+                    const isActive = pathname?.startsWith(item?.url);
+                    return (
+                        <SidebarMenuItem key={index} className={isActive ? "bg-gray-400 rounded-lg" : ""}>
                         <Link href={item.url}>
                             <SidebarMenuButton tooltip={item.title}>
                                 {item.icon && <item.icon />}
@@ -41,7 +45,8 @@ export function NavMain({ items }) {
                             </SidebarMenuButton>
                         </Link>
                     </SidebarMenuItem>
-                ))}
+                    )
+                })}
 
                 {/* Fixing the nested <button> issue */}
                 <Collapsible>

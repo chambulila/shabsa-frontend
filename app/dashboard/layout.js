@@ -20,9 +20,9 @@ import { redirect } from "next/navigation"
 export default function AdminLayout({children}) {
   const localtoken = Cookies.get('auth_token');
   // Cookies.remove('auth_token')
-    if (!localtoken) {
-      redirect("/login");
-    }
+    // if (!localtoken) {
+    //   redirect("/login");
+    // }
   return (
     <SidebarProvider>
       <AppSidebar />
