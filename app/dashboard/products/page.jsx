@@ -11,6 +11,7 @@ import { Pagination } from '@mui/material';
 import { Input } from '@/components/ui/input';
 import debounce from 'debounce'; // Import debounce
 import Link from 'next/link';
+import ProductListSkeleton from '@/components/products/ProductsListSkeletonLoading';
 
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
@@ -70,7 +71,7 @@ const ProductTable = () => {
     };
 
     if (loading) {
-        return <div>Loading products...</div>;
+        return <ProductListSkeleton />
     }
 
     if (products?.length === 0) {

@@ -1,4 +1,5 @@
 "use client"
+import CategoryListSkeleton from '@/components/category/CategoryListSkeletonLoading';
 import CreateCategory from '@/components/category/CreateCategory';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -11,13 +12,18 @@ export default function page() {
     const [createCategory, setCreateCategory] = useState(false);
     const [categories, setCategories] = useState([]);
     const [categoryToEdit, setCategoryToEdit] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getCategories = async () => {
-        const response = await brandAndCategoryService.getCategories();
-        setCategories(response?.data?.categories)
-        return response.data;
+        try {
+            const response = await brandAndCategoryService.getCategories();
+            setCategories(response?.data?.categories)
+            return response.data;
+        } finally {
+            setIsLoading(false);
+        }
     }
-    console.log(categories)
+
     useEffect(() => {
         getCategories();
     }, []);
@@ -40,6 +46,10 @@ export default function page() {
             console.log("Failed to delete brand:", response);
         }
     }
+
+    if (isLoading) {
+        return <CategoryListSkeleton />
+    }
     return (
         <div>
             <Dialog open={createCategory}>
@@ -47,7 +57,7 @@ export default function page() {
                     <DialogHeader>
                         <DialogTitle>Create New Category</DialogTitle>
                     </DialogHeader>
-                    <CreateCategory  handleClose={handleCloseModal} categoryToEdit={categoryToEdit} getCategories={getCategories} />
+                    <CreateCategory handleClose={handleCloseModal} categoryToEdit={categoryToEdit} getCategories={getCategories} />
                 </DialogContent>
             </Dialog>
             <div className="flex justify-end ">

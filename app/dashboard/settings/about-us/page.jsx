@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import SuneditorTextField from '@/components/ui/SuneditorTextField';
+import { redirect } from 'next/navigation';
 export default function page() {
     const [createModal, setCreateModal] = useState(false);
     const [data, setData] = useState({
@@ -16,24 +17,44 @@ export default function page() {
     });
 
     const handleTextChange = (field, value) => {
-        setData({ ...data, [field]: value });
+        setData((prev) => {
+            return {
+                ...prev, [field]: value
+            }
+        });
     }
 
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        setData({ ...data, image: files });
+    };
+
+    const handleSubmitAbout = (event) => {
+        event.preventDefault();
+        console.log(data)
+    }
     return (
         <div>
             <Dialog open={createModal} className="w-[100%]" >
-                <DialogContent>
+                <DialogContent className="w-full max-w-[70%]">
                     <DialogHeader>
                         <DialogTitle>Edit About Us Details</DialogTitle>
                     </DialogHeader>
                     {/* Change DialogDescription to a div to avoid the invalid nesting */}
-                    <div className="text-sm text-muted-foreground">
-                        <Input onChange={(event) => handleTextChange("title", event.target.value)} />
-                        <SuneditorTextField setValue={(event) => handleTextChange("description", event)} />
+                    <form onSubmit={handleSubmitAbout}>
+                    <div className="text-sm text-muted-foreground space-y-8">
+                        <Input name="title" placeholder="Write title here..." onChange={(event) => handleTextChange("title", event.target.value)} />
+                        <SuneditorTextField placeholder="Description here..." setValue={(event) => handleTextChange("description", event)} />
+                        <Input type="file" id="image" name="image"  className="w-full" onChange={handleImageChange} />
                     </div>
+                <div className="flex justify-end gap-3">
+                    <Button className="bg-secondary text-black border-black border-2 hover:bg-blue-800 hover:text-white" onClick={() => setCreateModal(false)} >Cancel</Button>
+                    <Button className="hover:bg-blue-800 hover:text-white" type="submit">Create</Button>
+                </div>
+                    </form>
                 </DialogContent>
-
             </Dialog>
+
             <div className="  flex justify-center items-center my-8 text-gray-700 text-5xl font-extrabold gap-4">
                 <p>About Us</p>
                 <Button onClick={() => setCreateModal(true)}>
