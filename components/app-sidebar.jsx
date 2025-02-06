@@ -66,7 +66,7 @@ const data = {
 export function AppSidebar({ ...props }) {
   return (
     <Sidebar  collapsible="icon" {...props}>
-      <SidebarContent>
+      <SidebarContent className="bg-gray-900 text-white">
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>

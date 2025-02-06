@@ -30,12 +30,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { authService } from "@/utils/authService"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 
 export function NavUser({user}) {
   const { isMobile } = useSidebar();
   const { logout } = useAuth();
+  const router = useRouter();
   
   async function handleLogout () {
     logout();
@@ -79,25 +80,11 @@ export function NavUser({user}) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={() => router.push('/dashboard/feedback')} >
                 <Bell />
-                Notifications
+                Client Feedback
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

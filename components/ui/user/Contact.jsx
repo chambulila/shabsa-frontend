@@ -1,15 +1,65 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { clientService } from '@/services/clientService';
 
 export default function Contact() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+        phone: ""
+    });
+
+    const handleChange = (event) => {
+        setData((prev) => {
+            return {
+                ...prev, [event.target.name]: event.target.value
+            }
+        })
+    }
+
+    const isFormFilled = () => {
+        if(data.name !== "" && data.email !== "" && data.message !== "" && data.phone !== "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            const response = await clientService.submitContactForm(data);
+            if(response?.status === 201) {
+                setData({
+                    name: "",
+                    email: "",
+                    company: "",
+                    message: "",
+                    phone: ""
+                });
+                setError(null);
+            }
+            return response;
+        } catch (error) {
+            setError(error?.response?.data?.errors);
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
     return (
         <div>
             <h2 className="text-3xl md:text-4xl font-bold  my-8 text-center">Contact Us</h2>
-
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
                 {/* Contact Information */}
                 <div className="space-y-6">
@@ -49,25 +99,33 @@ export default function Contact() {
                 {/* Contact Form */}
                 <div className="bg-gray-100 text-gray-800 p-8 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-6">Send Message</h3>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <Label htmlFor="name">Full Name</Label>
-                            <Input type="text" id="name" className="w-full" />
+                            <Input onChange={handleChange} value={data.name} type="text" name="name" id="name" className="w-full" />
+                            {error?.name && <p className="text-red-800 text-xs">{ error?.name }</p>}
+                        </div>
+                        <div>
+                            <Label htmlFor="phone">Phone Number</Label>
+                            <Input onChange={handleChange} value={data.phone} type="number" name="phone" id="phone" className="w-full" />
+                            {error?.phone && <p className="text-red-800 text-xs">{ error?.phone }</p>}
                         </div>
                         <div>
                             <Label htmlFor="email">Email</Label>
-                            <Input type="email" id="email" className="w-full" />
+                            <Input onChange={handleChange} value={data.email} type="email" name="email" id="email" className="w-full" />
+                            {error?.email && <p className="text-red-800 text-xs">{ error?.email }</p>}
                         </div>
                         <div>
                             <Label htmlFor="company">Company (Optional)</Label>
-                            <Input type="company" id="company" className="w-full" />
+                            <Input onChange={handleChange} value={data.company} type="text" name="company" id="company" className="w-full" />
                         </div>
                         <div>
                             <Label htmlFor="message">Type your Message</Label>
-                            <Textarea id="message" className="w-full h-32 resize-none" />
+                            <Textarea onChange={handleChange} value={data.message} id="message" name="message" className="w-full h-32 resize-none" />
+                            {error?.message && <p className="text-red-800 text-xs">{ error?.message }</p>}
                         </div>
-                        <Button type="submit" className=" bg-gray-800 hover:bg-blue-800 w-full text-white font-bold py-2 px-4 rounded">
-                            Send
+                        <Button disabled={isSubmitting || !isFormFilled} type="submit" className=" bg-gray-800 hover:bg-blue-800 w-full text-white font-bold py-2 px-4 rounded">
+                            {isSubmitting ? 'Submittng...' : 'Send'}
                         </Button>
                     </form>
                 </div>

@@ -74,10 +74,6 @@ const ProductTable = () => {
         return <ProductListSkeleton />
     }
 
-    if (products?.length === 0) {
-        return <div>No products found.</div>;
-    }
-
     return (
         <div className="container mx-auto p-4">
             <h4 className="text-2xl font-bold mb-4 text-nowrap">Products List</h4>
@@ -106,6 +102,9 @@ const ProductTable = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
+                    {products?.length === 0 && <TableRow>
+                            <TableCell className="whitespace-nowrap"> No products found. </TableCell>
+                        </TableRow>}
                         {products?.map((product) => (
                             <TableRow key={product.id}>
                                 <TableCell>

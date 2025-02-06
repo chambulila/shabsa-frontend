@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Menu, ShoppingCart } from 'lucide-react'
 import { Button } from '../button2'
@@ -8,19 +8,25 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { usePathname } from 'next/navigation'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../dialog'
 import Cart from '@/components/cart/Cart'
+import Cookies from 'js-cookie'
+import { useCart } from '@/contexts/cartContext'
 
 export default function Header() {
-  const [isCartOpen, setIsCartOpen] = React.useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [productCart, setProductCart] = useState([]);
+  const [token, setToken] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const { cartItems } = useCart();
+
   const navigation = [
     { name: 'HOME', href: '/home', isActive: pathname === '/home' },
     { name: 'ABOUT', href: '/about-us', isActive: pathname === '/about-us' },
     { name: 'SERVICE', href: '/services', isActive: pathname.startsWith('/services') },
-    // { name: 'TEAM', href: '#', isActive: pathname === '/team' },
     { name: 'PRODUCTS', href: '/products', isActive: pathname === '/products' },
-    // { name: 'PAGES', href: '#', isActive: pathname === '/pages' },
     { name: 'CONTACT US', href: '/contact-us', isActive: pathname === '/contact-us' },
-  ]
+  ];
+
   return (
     <header className="bg-[#030f27] text-white sticky top-0 z-50">
       <nav className="container mx-auto px-4" aria-label="Top">
@@ -31,7 +37,7 @@ export default function Header() {
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-medium transition-colors ${link.isActive ? "text-[#FDB813]" : "hover:text-[#FDB813]"
-                  }`}              >
+                  }`} >
                 {link.name}
               </Link>
             ))}
@@ -60,7 +66,7 @@ export default function Header() {
             <div className="relative cursor-pointer" onClick={() => setIsCartOpen(true)}>
               <ShoppingCart className="h-6 w-6" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
-                {'0'}
+                {cartItems?.length || 0}
               </span>
             </div>
 
@@ -68,7 +74,7 @@ export default function Header() {
             {pathname !== '/login' && (
               <Link href={'/login'}>
                 <button className="bg-[#FDB813] text-[#030f27] font-bold hover:bg-[#EAA30B] rounded-lg px-4 py-2 transition-all">
-                  Login
+                  {token ? 'Dashboard' : 'Login'}
                 </button>
               </Link>
             )}
@@ -77,15 +83,14 @@ export default function Header() {
       </nav>
 
       {/* OPEN CART MODAL */}
-      <Dialog open={isCartOpen} >
+      <Dialog open={isCartOpen}  >
         <DialogContent className="max-w-3xl p-6">
           <DialogHeader>
-          <DialogTitle>Shopping Bag</DialogTitle>
+            <DialogTitle>Shopping Bag</DialogTitle>
           </DialogHeader>
           <Cart closeCartModal={() => setIsCartOpen(false)} />
         </DialogContent>
       </Dialog>
     </header>
-  )
+  );
 }
-

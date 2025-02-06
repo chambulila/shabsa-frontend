@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Edit2Icon, LightbulbIcon, RocketIcon } from "lucide-react";
 import Image from "next/image";
@@ -8,13 +8,23 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from '@/components/ui/input';
 import SuneditorTextField from '@/components/ui/SuneditorTextField';
 import { redirect } from 'next/navigation';
+import { companySettingService } from '@/services/companySettingService';
 export default function page() {
     const [createModal, setCreateModal] = useState(false);
+    const [creating, setCreating] = useState(false);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [fetchedAboutUs, setFetchedAboutUs] = useState(null);
     const [data, setData] = useState({
-        title: '',
-        description: '',
-        image: '',
+        title: fetchedAboutUs?.title || 'mimi',
+        description: fetchedAboutUs?.description || '',
+        image: fetchedAboutUs?.image ||'',
+        mission: fetchedAboutUs?.mission ||'',
+        vision: fetchedAboutUs?.vision ||'',
+        id: fetchedAboutUs?.uuid || 0
     });
+
+    const handleCloseCreate = () => setCreateModal(false);
 
     const handleTextChange = (field, value) => {
         setData((prev) => {
@@ -23,16 +33,72 @@ export default function page() {
             }
         });
     }
+    
+    useEffect(() => {
+        if(fetchedAboutUs) {
+        setData((prev) => {
+            return {
+                ...prev,
+                title: fetchedAboutUs?.title,
+                description: fetchedAboutUs?.description,
+                image: fetchedAboutUs?.image,
+                mission: fetchedAboutUs?.mission,
+                vision: fetchedAboutUs?.vision,
+                id: fetchedAboutUs?.uuid,
+            }
+        })
+    }
+    }, [fetchedAboutUs])
 
     const handleImageChange = (e) => {
-        const files = Array.from(e.target.files);
+        const files = e.target.files[0];
         setData({ ...data, image: files });
     };
 
-    const handleSubmitAbout = (event) => {
-        event.preventDefault();
-        console.log(data)
+    const fetchAboutUs = async () => {
+        try {
+            const response = await companySettingService.getAboutUs();
+            setFetchedAboutUs(response?.data?.about);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setIsLoading(false);
+        }
     }
+
+    useEffect(() => {
+        fetchAboutUs();
+    }, []);
+
+    const handleSubmitAbout = async (event) => {
+        event.preventDefault();
+        setCreating(true);
+        try {
+            const formData = new FormData();
+            formData.append("title", data.title);
+            formData.append("description", data.description);
+            formData.append("image", data.image);
+            formData.append("mission", data.mission);
+            formData.append("vision", data.vision);
+            formData.append("id", data.id);
+            const response = await companySettingService.storeAboutUs(formData);
+            if(response?.status === 201){
+                fetchAboutUs();
+              }
+            console.log(response);
+        } catch (error) {
+            setError(error);
+            setCreating(false);
+        } finally {
+            setCreating(false);
+            handleCloseCreate();
+        }
+    }
+
+    if (isLoading) {
+        return <p>Loading data!!</p>
+    }
+
     return (
         <div>
             <Dialog open={createModal} className="w-[100%]" >
@@ -43,13 +109,15 @@ export default function page() {
                     {/* Change DialogDescription to a div to avoid the invalid nesting */}
                     <form onSubmit={handleSubmitAbout}>
                     <div className="text-sm text-muted-foreground space-y-8">
-                        <Input name="title" placeholder="Write title here..." onChange={(event) => handleTextChange("title", event.target.value)} />
-                        <SuneditorTextField placeholder="Description here..." setValue={(event) => handleTextChange("description", event)} />
-                        <Input type="file" id="image" name="image"  className="w-full" onChange={handleImageChange} />
+                        <Input name="title" value={data.title} placeholder="Write title here..." onChange={(event) => handleTextChange("title", event.target.value)} />
+                        <Input name="vision" value={data.vision} placeholder="Write vision here..." onChange={(event) => handleTextChange("vision", event.target.value)} />
+                        <Input name="mission" value={data.mission} placeholder="Write mission here..." onChange={(event) => handleTextChange("mission", event.target.value)} />
+                        <SuneditorTextField value={data.description} placeholder="Description here..." setValue={(event) => handleTextChange("description", event)} />
+                        <Input type="file"  required={!data?.image} id="image" name="image"  className="w-full" onChange={handleImageChange} />
                     </div>
                 <div className="flex justify-end gap-3">
-                    <Button className="bg-secondary text-black border-black border-2 hover:bg-blue-800 hover:text-white" onClick={() => setCreateModal(false)} >Cancel</Button>
-                    <Button className="hover:bg-blue-800 hover:text-white" type="submit">Create</Button>
+                    <Button type="button" className="bg-secondary text-black border-black border-2 hover:bg-blue-800 hover:text-white" onClick={handleCloseCreate} >Cancel</Button>
+                    <Button disabled={creating} className="hover:bg-blue-800 hover:text-white" type="submit">{creating ? 'Submitting' : 'Submit'}</Button>
                 </div>
                     </form>
                 </DialogContent>
@@ -66,11 +134,10 @@ export default function page() {
             <div className="relative ">
                 <div className="container mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-12 px-6">
                     {/* Left Image */}
-                    <div className="relative flex-shrink-0 w-full md:w-1/2 h-64 md:h-auto">
+                    <div className={`relative flex-shrink-0 w-full md:w-1/2 h-64 md:h-auto ${!fetchedAboutUs?.image ? 'bg-black' : ''}`}>
                         <Image
-                            src="/logo.jpeg" // Replace with the actual image path
+                            src={fetchedAboutUs?.image || '/logo1.png'} // Replace with the actual image path
                             alt="Crane"
-                            // layout="fill"yellow-500
                             width={1000}
                             height={1000}
                             objectFit="cover"
@@ -84,31 +151,16 @@ export default function page() {
                             Welcome to Shabsa ceramic & general supply limited
                         </h2>
                         <h1 className="text-4xl text-gray-600 text-start md:text-5xl font-bold mt-2 leading-tight">
-                            More Than 10 Years Of Experience
+                            {fetchedAboutUs?.title}
                         </h1>
-                        <p className="text-gray-500 mt-4 font-semibold ">
-                            We have a liability to improve on how to serve customers in a good and high-quality building material products from different corners of the world to the full satisfaction, confident, and compatibility of our customers.
-                            <br /> <br />
-                            The company products range covers tiles of both designs, ceramics, and marbles with the different sizes.
-
-                            Something more to protect our clients' interests, we have staff and good team of experts and highly trained specialists like elevators and hardware products with experience in and outside the country to accomplish the targets and to acquire customers' satisfaction at an economical price.
-
-                            For the sake of building materials with high-end quality at economical price, <b>Shabsa Ceramics & General Supply Limited</b> is the place to check with.
-                        </p>
+                        <div className="text-gray-500 mt-4 font-semibold ">
+                            <div dangerouslySetInnerHTML={{ __html: fetchedAboutUs?.description }} />
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className="flex flex-col text-center shadow-none">
-                {/* Header */}
-                <div className="h-16 md:h-24 text-gray-600 flex justify-center items-center text-3xl md:text-5xl font-extrabold gap-4">
-                    <p>MISSION & VISION</p>
-                    <Button >
-                        <Edit2Icon className="inline-block w-6 h-6 text-yellow-500" />
-                        Edit Mission & Vision
-                    </Button>
-                </div>
-
                 {/* Cards Container */}
                 <div className="flex flex-col md:flex-row gap-5 md:gap-8 my-5 px-4 md:px-16 text-gray-500">
                     {/* Mission Card */}
@@ -122,7 +174,7 @@ export default function page() {
                         </CardHeader>
                         <CardContent className="flex text-center">
                             <CardDescription className="font-bold text-sm md:text-base">
-                                To bring satisfaction, confidence, and comfort to everyone by ensuring value for the expenditures made on our products.
+                                {fetchedAboutUs?.mission}
                             </CardDescription>
                         </CardContent>
                     </Card>
@@ -138,7 +190,7 @@ export default function page() {
                         </CardHeader>
                         <CardContent className="flex text-center">
                             <CardDescription className="font-bold text-sm md:text-base">
-                                To become a center of excellence in providing products and services of the highest quality and value to our customers.
+                                {fetchedAboutUs?.vision}
                             </CardDescription>
                         </CardContent>
                     </Card>

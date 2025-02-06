@@ -7,35 +7,37 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { CardDescription } from '../ui/card';
 import DeliveryInfo from './DeliveryInfo';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
+import { useCart } from '@/contexts/cartContext';
 
-const cartItems = [
-    {
-        id: 1,
-        name: "Common Projects Bball High",
-        color: "White",
-        price: 549,
-        quantity: 2,
-        image: "/common-projects.jpg", // Replace with your image path
-    },
-    {
-        id: 2,
-        name: "Maison Margiela Future Sneakers",
-        color: "White",
-        price: 870,
-        quantity: 1,
-        image: "/maison-margiela.jpg", // Replace with your image path
-    },
-    {
-        id: 3,
-        name: "Our Legacy Brushed Scarf",
-        color: "Brown",
-        price: 349,
-        quantity: 1,
-        image: "/our-legacy.jpg", // Replace with your image path
-    },
-];
+// const cartItems = [
+//     {
+//         id: 1,
+//         name: "Common Projects Bball High",
+//         color: "White",
+//         price: 549,
+//         quantity: 2,
+//         image: "/common-projects.jpg", // Replace with your image path
+//     },
+//     {
+//         id: 2,
+//         name: "Maison Margiela Future Sneakers",
+//         color: "White",
+//         price: 870,
+//         quantity: 1,
+//         image: "/maison-margiela.jpg", // Replace with your image path
+//     },
+//     {
+//         id: 3,
+//         name: "Our Legacy Brushed Scarf",
+//         color: "Brown",
+//         price: 349,
+//         quantity: 1,
+//         image: "/our-legacy.jpg", // Replace with your image path
+//     },
+// ];
 
 const Cart = ({ closeCartModal }) => {
+    const { cartItems, removeFromCart, clearCart } = useCart();
     const [cart, setCart] = useState(cartItems);
     const [isDeliveryFormOpen, setIsDeliveryFormOpen] = useState(false);
 
@@ -57,10 +59,6 @@ const Cart = ({ closeCartModal }) => {
         return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     };
 
-    if (cart.length === 0) {
-        return <div className="p-4 text-center">Your cart is empty.</div>;
-    }
-
     return (
         <div className="container w-full mx-auto p-4">
             <div className="overflow-x-auto">
@@ -78,11 +76,11 @@ const Cart = ({ closeCartModal }) => {
                     <TableBody>
                         {cart.map((item, index) => (
                             <TableRow key={index}>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"><X onClick={() => handleRemove(item.id)} /></TableCell>
+                                <TableCell className="border-0 text-sm whitespace-nowrap"><X onClick={() => removeFromCart(item.id)} /></TableCell>
                                 <TableCell className="border-0 text-sm whitespace-nowrap"> {index += 1} </TableCell>
                                 <TableCell className="border-0 text-sm whitespace-nowrap"> <div className="relative w-16 h-16">
                                     <Image
-                                        src={'/products/white1.png'}
+                                        src={item?.images[0] ?? '/logo.jpeg'}
                                         alt={item.name}
                                         fill
                                         style={{ objectFit: "cover" }}
@@ -107,10 +105,12 @@ const Cart = ({ closeCartModal }) => {
             <div className="mt-4 text-right font-bold">
                 Total: ${calculateTotal()}
             </div>
+            
+            {cart.length === 0 && <div className="p-4 text-center">Your cart is empty.</div>}
 
             <div className="flex justify-between items-center">
                 <Button onClick={() => closeCartModal()}>Continue Shoping</Button>
-                <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>
+               {cart.length > 1 && <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>}
             </div>
 
             {/* PLACE ORDER MODAL */}
