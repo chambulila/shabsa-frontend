@@ -16,6 +16,10 @@ class ClientService {
         return response;
     }
 
+    async submitOrder (data) {
+        const response = await api.post('/orders', data);
+        return response;
+    }
     
 }
 export const clientService = new ClientService;

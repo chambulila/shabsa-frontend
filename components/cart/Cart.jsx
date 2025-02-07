@@ -110,7 +110,7 @@ const Cart = ({ closeCartModal }) => {
 
             <div className="flex justify-between items-center">
                 <Button onClick={() => closeCartModal()}>Continue Shoping</Button>
-               {cart.length > 1 && <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>}
+               {cart.length > 0 && <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>}
             </div>
 
             {/* PLACE ORDER MODAL */}
@@ -122,7 +122,7 @@ const Cart = ({ closeCartModal }) => {
                             Please fill in your information below to complete your order.
                         </DialogDescription>
                     </DialogHeader>
-                    <DeliveryInfo setOpen={setIsDeliveryFormOpen} />
+                    <DeliveryInfo cartItems={cartItems} clearCart={clearCart} closeCartModal={closeCartModal} setOpen={setIsDeliveryFormOpen} />
                 </DialogContent>
             </Dialog>
         </div>

@@ -25,5 +25,10 @@ class ProductService {
         const response = await api.get(`/products/create`);
         return response;
     }
+
+    async getOrders () {
+        const response = await api.get('/orders');
+        return response;
+    }
 }
 export const productService = new ProductService;

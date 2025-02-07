@@ -17,11 +17,16 @@ import { useCart } from "@/contexts/cartContext";
 
 const ProductCard = ({ product }) => {
     const [open, setOpen] = useState(false);
-    const { addToCart } = useCart();
+    const [cart, setCart] = useState(null);
+
+    const handleOrder = (product) => {
+        setCart(product);
+        setOpen(true);
+    }
 
     return (
         <div className="border rounded-lg shadow-sm hover:scale-105 hover:shadow-md transition duration-500">
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={open} >
                 <DialogContent className="w-full sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>Delivery Details</DialogTitle>
@@ -29,7 +34,7 @@ const ProductCard = ({ product }) => {
                             Please fill in your information below to complete your order.
                         </DialogDescription>
                     </DialogHeader>
-                    <DeliveryInfo setOpen={setOpen} />
+                    <DeliveryInfo cartItems={[cart]}  clearCart={()=>setCart(null)} setOpen={()=>setOpen(false)} />
                 </DialogContent>
             </Dialog>
 
@@ -56,7 +61,7 @@ const ProductCard = ({ product }) => {
                             Add To Cart
                         </Button>
                         <Button
-                            onClick={() => setOpen(true)}
+                            onClick={() => handleOrder(product)}
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
                             <ShoppingBasket className="h-4 w-4 inline-block mr-1" />
@@ -135,8 +140,8 @@ const ProductsPage = () => {
                 Featured Products
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products?.map((product) => (
-                    <ProductCard key={product.name} product={product} />
+                {products?.map((product, index) => (
+                    <ProductCard key={index} product={product} />
                 ))}
             </div>
         </div>
