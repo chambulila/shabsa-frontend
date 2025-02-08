@@ -11,5 +11,10 @@ class CompanySettingService {
         return response;
     }
 
+    async storeLandingPageData (data) {
+        const response = await api.post('/landing', data);
+        return response;
+    }
+
 }
 export const companySettingService = new CompanySettingService;

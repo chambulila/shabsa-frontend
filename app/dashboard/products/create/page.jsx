@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { redirect, useRouter } from 'next/navigation';
 import { productService } from '@/services/productService';
 import SuneditorTextField from '@/components/ui/SuneditorTextField';
+import { toast } from 'react-toastify';
 
 const NewProduct = () => {
     const [brands, setBrands] = useState([]);
@@ -42,7 +43,6 @@ const NewProduct = () => {
         getBrandAndCategories();
     }, [])
 
-    console.log(brands)
     const handleInputChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -81,10 +81,11 @@ const NewProduct = () => {
         try {
           const response = await productService.createProduct(formData);
           if(response?.status === 201){
+            toast.success('Product created successfully')
             router.push('/dashboard/products'); 
           }
         } catch (error) {
-          console.log('Error creating product:', error);
+          toast.error('Error creating product');
         }
       };
 

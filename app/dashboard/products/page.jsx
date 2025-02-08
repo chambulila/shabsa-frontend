@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import debounce from 'debounce'; // Import debounce
 import Link from 'next/link';
 import ProductListSkeleton from '@/components/products/ProductsListSkeletonLoading';
+import { toast } from 'react-toastify';
 
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
@@ -69,6 +70,18 @@ const ProductTable = () => {
             return { ...prev, page: newPage };
         });
     };
+
+    const handleDelete = async (product) => {
+        if(confirm('Are you sure you want to delete')){
+            const response = await productService.deleteProduct(product.id);
+            if (response?.status == 204) {
+                toast.success("Product deleted successfully");
+                fetchProducts();
+            } else {
+                toast.error("Failed to delete product");
+            }
+        }
+    }
 
     if (loading) {
         return <ProductListSkeleton />
@@ -131,7 +144,7 @@ const ProductTable = () => {
                                 <TableCell>{product.is_published == 1 ? 'Published' : 'Not Published'}</TableCell>
                                 <TableCell className="flex gap-3">
                                 <Link href={`/dashboard/products/${product.id}/edit`}> <Edit2Icon /> </Link>
-                                    <button><Trash2Icon className="text-red-800" /></button>
+                                    <button onClick={() => handleDelete(product)} ><Trash2Icon className="text-red-800" /></button>
                                 </TableCell>
                             </TableRow>
                         ))}

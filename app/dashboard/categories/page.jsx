@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { brandAndCategoryService } from '@/services/brandAndCategoryService';
 import { Edit2Icon, Trash2Icon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 export default function page() {
     const [creatingCategory, setCreatingCategory] = useState(false);
     const [createCategory, setCreateCategory] = useState(false);
@@ -41,9 +42,10 @@ export default function page() {
     const handleDelete = async (brand) => {
         const response = await brandAndCategoryService.deleteCategory(brand.uuid);
         if (response?.status == 204) {
+            toast.success("Category deleted successfully");
             getCategories();
         } else {
-            console.log("Failed to delete brand:", response);
+            toast.error("Failed to delete brand");
         }
     }
 

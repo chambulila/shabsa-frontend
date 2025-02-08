@@ -55,12 +55,20 @@ export function NavMain({ items }) {
                         <div className="w-full">
                             <SidebarMenuButton tooltip={'Company Settings'}>
                                 <BrainCog />
-                                <span>{"Settings 2"}</span>
+                                <span>{"Settings"}</span>
                             </SidebarMenuButton>
                         </div>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                         <SidebarMenu>
+                        <SidebarMenuItem>
+                                <Link href="/dashboard/settings/landing-page">
+                                    <SidebarMenuButton tooltip="About Us">
+                                        <HomeIcon />
+                                        <span>Landing Page</span>
+                                    </SidebarMenuButton>
+                                </Link>
+                            </SidebarMenuItem>
                             <SidebarMenuItem>
                                 <Link href="/dashboard/settings/about-us">
                                     <SidebarMenuButton tooltip="About Us">
