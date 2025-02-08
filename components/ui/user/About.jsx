@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function About() {
     return (
         <div>
-            <div className="  flex justify-center items-center my-8 text-gray-700 text-5xl font-extrabold">About Us</div>
+            <div className="  flex justify-center items-center my-5 text-yellow-500 bg-gray-900 py-6 text-5xl font-extrabold">About Us</div>
 
             <div className="relative ">
                 <div className="container mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-12 px-6">

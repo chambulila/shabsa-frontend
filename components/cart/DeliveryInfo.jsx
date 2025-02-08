@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '../ui/button';
 import { clientService } from '@/services/clientService';
+import { toast } from 'react-toastify';
 function DeliveryInfo({ cartItems, closeCartModal = null, clearCart, setOpen }) {
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState(null);
@@ -34,6 +35,7 @@ function DeliveryInfo({ cartItems, closeCartModal = null, clearCart, setOpen }) 
         try {
             const response = await clientService.submitOrder(data);
             if (response?.status === 201) {
+                toast.success('Your order have been successfully sent!')
                 setOpen(false);
                 setFormData();
                 clearCart();
@@ -46,7 +48,12 @@ function DeliveryInfo({ cartItems, closeCartModal = null, clearCart, setOpen }) 
             setSubmitting(false);
         }
     }
-console.log("cart items: ", cartItems)
+    
+    if (error) {
+        toast.error(error);
+        setError(null);
+    }
+
     return (
         <form action={create}>
             <div className="w-full space-y-4">

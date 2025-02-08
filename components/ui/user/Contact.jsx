@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { clientService } from '@/services/clientService';
+import { toast } from 'react-toastify';
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,6 +42,7 @@ export default function Contact() {
         try {
             const response = await clientService.submitContactForm(data);
             if(response?.status === 201) {
+                toast.success('Your message successfully sent!')
                 setData({
                     name: "",
                     email: "",
@@ -59,8 +61,8 @@ export default function Contact() {
     }
     return (
         <div>
-            <h2 className="text-3xl md:text-4xl font-bold  my-8 text-center">Contact Us</h2>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <h2 className="text-3xl md:text-4xl font-bold  my-5 text-yellow-500 bg-gray-900 py-6 text-center">Contact Us</h2>
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 px-4 md:px-8 lg:px-16">
                 {/* Contact Information */}
                 <div className="space-y-6">
                     <h2 className="text-3xl font-bold">Get In Touch</h2>

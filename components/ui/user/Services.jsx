@@ -8,7 +8,7 @@ import { truncateText } from "@/utils/constantsAndFuntions";
 export default function Services() {
   return (
     <div>
-        <h2 className="text-3xl md:text-4xl font-bold my-8 text-center">Our Services</h2>
+        <h2 className="text-3xl md:text-4xl font-bold my-5 text-yellow-500 bg-gray-900 py-6 text-center">Our Services</h2>
         
         {/* Cards Container */}
         <div className="w-full flex flex-wrap justify-center mb-8 gap-6">

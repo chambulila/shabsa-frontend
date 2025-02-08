@@ -18,7 +18,8 @@ import { useCart } from "@/contexts/cartContext";
 const ProductCard = ({ product }) => {
     const [open, setOpen] = useState(false);
     const [cart, setCart] = useState(null);
-
+    const {addToCart} = useCart();
+    
     const handleOrder = (product) => {
         setCart(product);
         setOpen(true);
@@ -34,7 +35,7 @@ const ProductCard = ({ product }) => {
                             Please fill in your information below to complete your order.
                         </DialogDescription>
                     </DialogHeader>
-                    <DeliveryInfo cartItems={[cart]}  clearCart={()=>setCart(null)} setOpen={()=>setOpen(false)} />
+                    <DeliveryInfo cartItems={[cart]} clearCart={() => setCart(null)} setOpen={() => setOpen(false)} />
                 </DialogContent>
             </Dialog>
 
@@ -135,14 +136,16 @@ const ProductsPage = () => {
         // return <ProductListSkeletonForUser />
     }
     return (
-        <div className="container mx-auto py-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+        <div className=" mx-auto ">
+            <h2 className="text-3xl md:text-4xl font-bold my-5 text-yellow-500 bg-gray-900 py-6 text-center">
                 Featured Products
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products?.map((product, index) => (
-                    <ProductCard key={index} product={product} />
-                ))}
+            <div className="container mx-auto ">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {products?.map((product, index) => (
+                        <ProductCard key={index} product={product} />
+                    ))}
+                </div>
             </div>
         </div>
     );

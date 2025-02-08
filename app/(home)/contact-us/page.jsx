@@ -4,7 +4,7 @@ import Contact from "@/components/ui/user/Contact";
 
 const ContactUs = () => {
     return (
-        <div className=" min-h-screen px-4 md:px-8 lg:px-16">
+        <div className=" min-h-screen ">
             <Contact />
         </div>
     );
