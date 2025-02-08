@@ -28,7 +28,8 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-[#030f27] text-white sticky top-0 z-50">
+    <header className=" bg-[#daa917] text-black sticky top-0 z-50">
+      {/* bg-[#030f27] */}
       <nav className="container mx-auto px-4" aria-label="Top">
         <div className="flex items-center justify-between h-16">
           <div className="hidden md:flex gap-8">
@@ -36,7 +37,7 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${link.isActive ? "text-[#FDB813]" : "hover:text-[#FDB813]"
+                className={`text-sm font-bold text-black transition-colors p-4 ${link.isActive ? "bg-[#030f27] text-white" : "hover:bg-[#030f27] hover:text-white"
                   }`} >
                 {link.name}
               </Link>
