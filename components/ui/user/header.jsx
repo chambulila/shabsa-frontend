@@ -14,10 +14,17 @@ import { useCart } from '@/contexts/cartContext'
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [productCart, setProductCart] = useState([]);
-  const [token, setToken] = useState(null);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { cartItems } = useCart();
+  const [token, setToken] = useState(null);
+  const [mounted, setMounted] = useState(false);
+  // Ensure component is mounted before accessing cookies
+  useEffect(() => {
+    setMounted(true);
+    setToken(Cookies.get('auth_token') || null);
+  }, []);
+
+  if (!mounted) return null; // Prevents hydration errors
 
   const navigation = [
     { name: 'HOME', href: '/home', isActive: pathname === '/home' },
@@ -74,7 +81,7 @@ export default function Header() {
             {/* Login Button */}
             {pathname !== '/login' && (
               <Link href={'/login'}>
-                <button className="bg-[#FDB813] text-[#030f27] font-bold hover:bg-[#EAA30B] rounded-lg px-4 py-2 transition-all">
+                <button className="bg-[#FDB813] text-[#030f27] border-2 border-black font-bold hover:bg-[#EAA30B] rounded-lg px-4 py-2 transition-all">
                   {token ? 'Dashboard' : 'Login'}
                 </button>
               </Link>
