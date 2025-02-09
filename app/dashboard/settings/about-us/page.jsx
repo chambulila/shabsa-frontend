@@ -136,7 +136,7 @@ export default function page() {
                     {/* Left Image */}
                     <div className={`relative flex-shrink-0 w-full md:w-1/2 h-64 md:h-auto ${!fetchedAboutUs?.image ? 'bg-black' : ''}`}>
                         <Image
-                            src={fetchedAboutUs?.image} // Replace with the actual image path
+                            src={fetchedAboutUs?.image?.replace(/([^:]\/)\/+/g, "$1")} // Replace with the actual image path
                             alt="Image"
                             width={1000}
                             height={1000}
