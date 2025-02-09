@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 function page() {
   return (
-    <>
+    <div>
       <Head>
         <title>About Us - Shabsa Ceramics</title>
         <meta name="description" content="Learn about Shabsa Ceramics & General Supply Ltd, your trusted source for building materials." />
@@ -21,7 +21,7 @@ function page() {
         {/* <meta name="twitter:image" content="/path/to/your/image.jpg" /> */}
       </Head>
       <Hero />
-    </>
+    </div>
 
 
   )
