@@ -105,8 +105,9 @@ export default function LandingPageComponent() {
                             className="absolute inset-0 z-0"
                             style={{
                                 backgroundImage: `url('${slide.image}')`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
+                                backgroundSize: 'contain', // Ensures full image is visible
+                                backgroundRepeat: 'no-repeat', // Prevents repetition
+                                backgroundPosition: 'center center', // Centers the image
                             }}
                         >
                             <div className="absolute inset-0 bg-black/50" />
