@@ -8,33 +8,12 @@ import CreateSlide from './CreateSlide';
 import { toast } from 'react-toastify';
 import { companySettingService } from '@/services/companySettingService';
 
-export default function LandingPageComponent() {
+export default function LandingPageComponent({fetchSlides, slides, loading}) {
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
     const pathname = usePathname();
     const [createSlide, setCreateSlide] = useState(false);
     const isAdmin = pathname === '/dashboard/settings/landing-page';
-    const [slides, setSlides] = useState([]);
     const [selectedSlide, setSelectedSlide] = useState(null);
-
-    const fetchSlides = async () => {
-        try {
-            const response = await companySettingService.getAboutUs();
-            if (response.status === 200) {
-                setSlides(response?.data?.landing);
-            }
-            return response;
-        } catch (error) {
-            toast.error('Error occured while fetching data')
-        } finally {
-            setLoading(false);
-        }
-    }
-    useEffect(() => {
-        // setTimeout(() => {
-        fetchSlides();
-        // }, 1000);
-    }, []);
 
     const handleDeleteSlide = async (id) => {
         if (confirm('Are you sure you want to delete')) {

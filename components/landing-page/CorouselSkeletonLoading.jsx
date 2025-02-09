@@ -9,7 +9,7 @@ const CarouselSkeleton = () => {
       </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 " />
 
       {/* Content Skeleton */}
       <div className="container mx-auto px-4 relative z-10 text-white">
