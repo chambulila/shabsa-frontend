@@ -99,7 +99,7 @@ export default function LandingPageComponent() {
                 </Dialog>
             </div>}
             <Carousel>
-                {slides.map((slide, index) => (
+                {slides?.map((slide, index) => (
                     <div key={index} className="relative h-[600px] flex items-center">
                         <div
                             className="absolute inset-0 z-0"
@@ -113,10 +113,10 @@ export default function LandingPageComponent() {
                         </div>
                         <div className="container mx-auto px-4 relative z-10 text-white">
                             <h2 className="text-2xl md:text-3xl font-medium mb-4">
-                                {slide.title}
+                                {slide?.title}
                             </h2>
                             <h1 className="text-4xl md:text-6xl font-bold mb-8">
-                                {slide.subtitle}
+                                {slide?.subtitle}
                             </h1>
                             <Button
                                 onClick={() => router.push('/about-us')}
