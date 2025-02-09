@@ -15,6 +15,11 @@ const nextConfig = {
             port: '8000',
             pathname: '/storage/settings/**',
           },
+          {
+            protocol: 'https', // Allow images from your live server
+            hostname: 'shabsa.eportsolutions.co.tz',
+            pathname: '/storage/**', // Allow all images from storage
+          },
         ],
       },
 };
