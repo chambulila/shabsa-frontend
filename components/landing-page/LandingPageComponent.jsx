@@ -116,7 +116,7 @@ export default function LandingPageComponent() {
                                 {slide?.title}
                             </h2>
                             <h1 className="text-4xl md:text-6xl font-bold mb-8">
-                                {slide?.subtitle}
+                                {slide?.caption}
                             </h1>
                             <Button
                                 onClick={() => router.push('/about-us')}
