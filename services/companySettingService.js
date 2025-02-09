@@ -16,5 +16,15 @@ class CompanySettingService {
         return response;
     }
 
+    async deleteSlide(id) {
+        const response = await api.delete(`/landing/${id}`);
+        return response;
+    }
+
+    async updateSlide(id, data) {
+        const response = await api.post(`/landing/${id}`, data);
+        return response;
+    }
+
 }
 export const companySettingService = new CompanySettingService;

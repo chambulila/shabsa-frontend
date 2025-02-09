@@ -12,7 +12,6 @@ const api = axios.create({
 // Add Authorization header dynamically
 api.interceptors.request.use((config) => {
   const token = Cookies.get('auth_token');
-  console.log("tiken is: ", token)
   if (token) {
       config.headers.Authorization = `Bearer ${token}`;
   }

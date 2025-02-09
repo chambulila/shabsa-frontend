@@ -8,13 +8,22 @@ import { X } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { companySettingService } from '@/services/companySettingService';
 
-export default function CreateSlide({ handleClose }) {
+export default function CreateSlide({ handleClose, refetchData, selectedSlide, setSelectedSlide }) {
     const [creatingSlide, setCreatingSlide] = useState(false);
     const [formData, setFormData] = useState({
-        title: '',
-        caption: '',
-        image: null,
+        title: selectedSlide?.title || '',
+        caption: selectedSlide?.caption || '',
+        image: selectedSlide?.image || null,
     });
+
+    console.log("fomData: ", formData)
+    const formNotFilled = () => {
+        if (formData.title === '' || formData.caption === '' || formData.image === null) {
+            return true;
+        } else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            return false;
+        }
+    }
 
     const handleInputChange = (key, value) => {
         setFormData((prev) => {
@@ -36,11 +45,19 @@ export default function CreateSlide({ handleClose }) {
 
         setCreatingSlide(true);
         try {
-            const response = await companySettingService.storeLandingPageData(data);
+            let response;
+            if (selectedSlide) {
+                response = await companySettingService.updateSlide(selectedSlide.id, data);
+            } else {
+                response = await companySettingService.storeLandingPageData(data);
+            }
+
             if (response?.status === 201) {
                 toast.success('Slide created successfully');
                 handleClose();
                 setFormData({ title: '', caption: '', image: null });
+                if(selectedSlide) setSelectedSlide(null);
+                refetchData();
             }
             return response;
         } catch (error) {
@@ -71,7 +88,7 @@ export default function CreateSlide({ handleClose }) {
                 {/* Image Preview */}
                 <div className="flex flex-wrap gap-4 mt-4">
                     {formData?.image && <div className="relative w-32 h-32 border rounded">
-                            <Image src={URL.createObjectURL(formData?.image)} alt={`Preview`} fill style={{objectFit:"cover"}}/>
+                            <Image src={!selectedSlide ? URL.createObjectURL(formData?.image) : formData.image } alt={`Preview`} fill style={{objectFit:"cover"}}/>
                             <button
                                 type="button"
                                 onClick={() => handleInputChange('image', null)}
@@ -84,8 +101,11 @@ export default function CreateSlide({ handleClose }) {
                 </div>
 
                 <div className="flex gap-3">
-                    <Button onClick={handleClose} className="bg-secondary text-black border-2 border-black hover:text-black hover:bg-blue-gray-800">Cancel</Button>
-                    <Button disabled={creatingSlide} type="submit" >{creatingSlide ? 'Submitting...' : 'Submit'}</Button>
+                    <Button type="button" onClick={() => {
+                        handleClose();
+                        setSelectedSlide(null);
+                    }} className="bg-secondary text-black border-2 border-black hover:text-black hover:bg-blue-gray-800">Cancel</Button>
+                    <Button disabled={creatingSlide || formNotFilled()} type="submit" >{creatingSlide ? 'Submitting...' : 'Submit'}</Button>
                 </div>
 
             </form>
