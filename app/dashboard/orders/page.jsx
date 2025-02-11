@@ -56,32 +56,37 @@ export default function page() {
       </Dialog>
 
       <Dialog open={openDetail} onOpenChange={handleCloseDetail}>
-        <DialogContent className="w-[80%] max-w-none">
+        <DialogContent className="w-[80%] max-w-none max-h-[80%] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{`${selectedOrder?.customer_name} Order Details`}</DialogTitle>
           </DialogHeader>
 
-          {selectedOrder?.items?.map((product, index) => <div key={index} className="border max-w-[50%] rounded-lg shadow-sm ">
-            <div className=" cursor-pointer text-center">
-              <Image
-                src={product?.images[0] ?? '/logo.jpeg'}
-                alt={product.product_name}
-                width={400}
-                height={300}
-                className="object-cover text-center flex items-center rounded-t-lg"
-              />
+          {/* Using a grid layout to show two columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
+            {selectedOrder?.items?.map((product, index) => (
+              <div key={index} className="border rounded-lg shadow-sm">
+                <div className="cursor-pointer text-center">
+                  <Image
+                    src={product?.images[0] ?? '/logo.jpeg'}
+                    alt={product.product_name}
+                    width={400}
+                    height={300}
+                    className="object-cover text-center flex items-center rounded-t-lg"
+                  />
 
-            <div className="p-4">
-              <h3 className="text-lg font-semibold cursor-pointer  break-words line-clamp-2">
-                {product.product_name}
-              </h3>
-              <p className="text-sm text-gray-500">{`Tsh. ${product.price}`}</p>
-            </div>
-            </div>
-
-          </div>)}
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold cursor-pointer break-words line-clamp-2">
+                      {product.product_name}
+                    </h3>
+                    <p className="text-sm text-gray-500">{`Tsh. ${product.price}`}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </DialogContent>
       </Dialog>
+
       <p className="text-xl font-bold">Orders List</p>
       <Table>
         <TableHeader>
@@ -110,7 +115,8 @@ export default function page() {
                 {new Date(order?.created_at).toLocaleDateString()}
               </TableCell>
               <TableCell> <Button onClick={() => handleShowProducts(order)} className="bg-slate-200 text-black border-2 border-gray-700 hover:text-white">{order?.items?.length || 0}</Button> </TableCell>
-              <TableCell>{order?.status === 0 ? 'Pending' : 'Served'}</TableCell>
+              <TableCell>
+                {order?.status === 0 ? 'Pending' : 'Served'}</TableCell>
               <TableCell>{order?.total_price.toFixed(2)}</TableCell>
               <TableCell className="flex gap-3">
                 <Trash2Icon className="text-red-800" />

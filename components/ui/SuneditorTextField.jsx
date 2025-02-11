@@ -19,7 +19,7 @@ const SuneditorTextField = ({value = "", setValue}) => {
           ["link", "image", "video"], // Media
           ["fullScreen", "showBlocks", "codeView"], // Additional tools
         ],
-      }} defaultValue={value} setContents={value} onChange={setValue} />
+      }} defaultValue={value} onChange={(event)=>setValue(event)} />
     </div>
   );
 };

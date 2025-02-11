@@ -57,12 +57,16 @@ const NewProduct = () => {
     };
 
     const handleDescriptionChange = (event) => {
-        setProduct({...product, description: event });
-    }
+        setProduct((prevProduct) => ({
+          ...prevProduct, // Spread the existing state
+          description: event, // Update only the description field
+        }));
+      };
+      
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-      
+
         // Append product details
         formData.append("title", product.title);
         formData.append("description", product.description);
@@ -70,24 +74,24 @@ const NewProduct = () => {
         formData.append("price", product.price);
         formData.append("category", product.category);
         formData.append("brand", product.brand);
-      
+
         // Append images
         if (product.images.length > 0) {
-          product.images.forEach((image, index) => {
-            formData.append(`images[${index}]`, image); // Use dynamic key for each image
-          });
+            product.images.forEach((image, index) => {
+                formData.append(`images[${index}]`, image); // Use dynamic key for each image
+            });
         }
-    
+
         try {
-          const response = await productService.createProduct(formData);
-          if(response?.status === 201){
-            toast.success('Product created successfully')
-            router.push('/dashboard/products'); 
-          }
+            const response = await productService.createProduct(formData);
+            if (response?.status === 201) {
+                toast.success('Product created successfully')
+                router.push('/dashboard/products');
+            }
         } catch (error) {
-          toast.error('Error creating product');
+            toast.error('Error creating product');
         }
-      };
+    };
 
     return (
         <div className="container mx-auto p-4">
@@ -114,30 +118,39 @@ const NewProduct = () => {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <Label htmlFor="category">Category</Label>
-                        <Select onValueChange={(value) => setProduct({...product, category: value})}>
+                        <Select value={product?.category?.toString()} onValueChange={(value) => setProduct({ ...product, category: value })}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder={gettingMetas ? 'Loading Categories' : 'Select a category'} value={product.category}/>
+                                <SelectValue placeholder={gettingMetas ? 'Loading Categories' : 'Select a category'} value={product.category} />
                             </SelectTrigger>
                             <SelectContent>
                                 {categories?.map((category) => (
-                                    <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
+                                    <SelectItem key={category.id} value={category.id.toString()}>{category.name}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                     </div>
                     <div>
                         <Label htmlFor="brand">Brand</Label>
-                        <Select onValueChange={(value) => setProduct({...product, brand: value})}>
+                        <Select
+                            value={product.brand?.toString()} // Ensure it's a string
+                            onValueChange={(value) => {
+                                console.log("Selected Brand:", value); // Debugging
+                                setProduct({ ...product, brand: value });
+                            }}
+                        >
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder={gettingMetas ? 'Loading Brands' : 'Select a brand'} value={product.brand}/>
+                                <SelectValue placeholder={gettingMetas ? 'Loading Brands...' : 'Select a brand'} />
                             </SelectTrigger>
                             <SelectContent>
                                 {brands?.map((brand) => (
-                                    <SelectItem key={brand.id} value={brand.id}>{brand.name}</SelectItem>
+                                    <SelectItem key={brand.id} value={brand.id.toString()}>
+                                        {brand.name}
+                                    </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                     </div>
+
                 </div>
                 <div>
                     <Label htmlFor="images">Images</Label>
@@ -148,7 +161,7 @@ const NewProduct = () => {
                 <div className="flex flex-wrap gap-4 mt-4">
                     {product.images.map((image, index) => (
                         <div key={index} className="relative w-32 h-32 border rounded">
-                            <Image src={URL.createObjectURL(image)} alt={`Preview ${index}`} fill style={{objectFit:"cover"}}/>
+                            <Image src={URL.createObjectURL(image)} alt={`Preview ${index}`} fill style={{ objectFit: "cover" }} />
                             <button
                                 type="button"
                                 onClick={() => handleRemoveImage(index)}
@@ -160,8 +173,8 @@ const NewProduct = () => {
                     ))}
                 </div>
                 <div className="flex justify-end gap-3">
-                <Button className="bg-secondary text-black border-black border-2 hover:bg-blue-800 hover:text-white" onClick={() => redirect('/dashboard/products')} >Cancel</Button>
-                <Button className="hover:bg-blue-800 hover:text-white" type="submit">Create</Button>
+                    <Button className="bg-secondary text-black border-black border-2 hover:bg-blue-800 hover:text-white" onClick={() => redirect('/dashboard/products')} >Cancel</Button>
+                    <Button className="hover:bg-blue-800 hover:text-white" type="submit">Create</Button>
                 </div>
             </form>
         </div>

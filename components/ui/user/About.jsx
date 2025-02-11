@@ -125,7 +125,7 @@ export default function About() {
                 </DialogContent>
             </Dialog>
 
-            <div className="  flex justify-center items-center my-8 text-gray-700 text-5xl font-extrabold gap-4">
+            <div className="  flex justify-center items-center my-5 text-yellow-500 bg-gray-900 py-6 text-5xl font-extrabold gap-4">
                 <p>About Us</p>
                 {isAdmin && <Button onClick={() => setCreateModal(true)}>
                     <Edit2Icon className="inline-block w-6 h-6 text-yellow-500" />

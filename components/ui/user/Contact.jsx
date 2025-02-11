@@ -133,7 +133,7 @@ export default function Contact() {
                 </div>
             </div>
 
-            <div className="w-full flex justify-center mt-8">
+            <div className="w-full flex justify-center mt-8 mb-10">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d20370.066916080774!2d39.346037921687646!3d-6.867938366438645!3m2!1i1024!2i768!4f13.1!2m1!1sUngindoni!5e0!3m2!1sen!2stz!4v1737149084093!5m2!1sen!2stz"
                     width="90%"

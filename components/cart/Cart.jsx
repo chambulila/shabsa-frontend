@@ -62,71 +62,95 @@ const Cart = ({ closeCartModal }) => {
     return (
         <div className="container w-full mx-auto p-4">
             <div className="overflow-x-auto">
-                <Table className="w-full">
+                <Table className="min-w-full">
                     <TableHeader>
                         <TableRow>
-                            <TableHead> </TableHead>
-                            <TableHead>#</TableHead>
-                            <TableHead>Image</TableHead>
-                            <TableHead>Product Name</TableHead>
-                            <TableHead>Quantity</TableHead>
-                            <TableHead>Price</TableHead>
+                            <TableHead className="px-2 py-4"> </TableHead>
+                            <TableHead className="px-2 py-4">#</TableHead>
+                            <TableHead className="px-2 py-4">Image</TableHead>
+                            <TableHead className="px-2 py-4">Product Name</TableHead>
+                            <TableHead className="px-2 py-4">Quantity</TableHead>
+                            <TableHead className="px-2 py-4">Price</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {cart.map((item, index) => (
-                            <TableRow key={index}>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"><X onClick={() => removeFromCart(item.id)} /></TableCell>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"> {index += 1} </TableCell>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"> <div className="relative w-16 h-16">
-                                    <Image
-                                        src={item?.images[0] ?? '/logo.jpeg'}
-                                        alt={item.name}
-                                        fill
-                                        style={{ objectFit: "cover" }}
-                                        className="rounded-md"
-                                    />
-                                </div> </TableCell>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"> {item.name} </TableCell>
-                                <TableCell className="border-0 text-sm whitespace-nowrap">
-                                    <div className="flex items-center space-x-2">
-                                        <button onClick={() => handleQuantityChange(item.id, 1)} className="bg-gray-200 rounded-full w-6 h-6 flex items-center justify-center">+</button>
-                                        <span>{item.quantity}</span>
-                                        <button onClick={() => handleQuantityChange(item.id, -1)} className="bg-gray-200 rounded-full w-6 h-6 flex items-center justify-center">-</button>
+                            <TableRow key={index} className="border-b">
+                                <TableCell className="border-0 text-sm whitespace-nowrap px-2 py-4">
+                                    <X onClick={() => removeFromCart(item.id)} />
+                                </TableCell>
+                                <TableCell className="border-0 text-sm whitespace-nowrap px-2 py-4">
+                                    {index + 1}
+                                </TableCell>
+                                <TableCell className="border-0 text-sm whitespace-nowrap px-2 py-4">
+                                    <div className="relative w-16 h-16">
+                                        <Image
+                                            src={item?.images[0] ?? '/logo.jpeg'}
+                                            alt={item.name}
+                                            fill
+                                            style={{ objectFit: "cover" }}
+                                            className="rounded-md"
+                                        />
                                     </div>
                                 </TableCell>
-                                <TableCell className="border-0 text-sm whitespace-nowrap"> {item.price} </TableCell>
+                                <TableCell className="border-0 text-sm  px-2 py-4">{item.name}</TableCell>
+                                <TableCell className="border-0 text-sm whitespace-nowrap px-2 py-4">
+                                    <div className="flex items-center space-x-2">
+                                        <button
+                                            onClick={() => handleQuantityChange(item.id, 1)}
+                                            className="bg-gray-200 rounded-full w-6 h-6 flex items-center justify-center"
+                                        >
+                                            +
+                                        </button>
+                                        <span>{item.quantity}</span>
+                                        <button
+                                            onClick={() => handleQuantityChange(item.id, -1)}
+                                            className="bg-gray-200 rounded-full w-6 h-6 flex items-center justify-center"
+                                        >
+                                            -
+                                        </button>
+                                    </div>
+                                </TableCell>
+                                <TableCell className="border-0 text-sm whitespace-nowrap px-2 py-4">{item.price}</TableCell>
                             </TableRow>
                         ))}
-
                     </TableBody>
                 </Table>
             </div>
+    
             <div className="mt-4 text-right font-bold">
                 Total: ${calculateTotal()}
             </div>
-            
+    
             {cart.length === 0 && <div className="p-4 text-center">Your cart is empty.</div>}
-
-            <div className="flex justify-between items-center">
-                <Button onClick={() => closeCartModal()}>Continue Shoping</Button>
-               {cart.length > 0 && <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>}
+    
+            <div className="flex justify-between items-center mt-4">
+                <Button onClick={() => closeCartModal()}>Continue Shopping</Button>
+                {cart.length > 0 && (
+                    <Button onClick={() => setIsDeliveryFormOpen(true)} className="bg-blue-800">Order Now</Button>
+                )}
             </div>
-
+    
             {/* PLACE ORDER MODAL */}
-            <Dialog open={isDeliveryFormOpen} >
-            <DialogContent className="w-full sm:max-w-[425px]">
+            <Dialog open={isDeliveryFormOpen}>
+                <DialogContent className="w-full sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>Delivery Details</DialogTitle>
                         <DialogDescription>
                             Please fill in your information below to complete your order.
                         </DialogDescription>
                     </DialogHeader>
-                    <DeliveryInfo cartItems={cartItems} clearCart={clearCart} closeCartModal={closeCartModal} setOpen={setIsDeliveryFormOpen} />
+                    <DeliveryInfo
+                        cartItems={cartItems}
+                        clearCart={clearCart}
+                        closeCartModal={closeCartModal}
+                        setOpen={setIsDeliveryFormOpen}
+                    />
                 </DialogContent>
             </Dialog>
         </div>
     );
+    
 };
 
 export default Cart;

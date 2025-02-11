@@ -92,7 +92,7 @@ export default function Header() {
 
       {/* OPEN CART MODAL */}
       <Dialog open={isCartOpen}  >
-        <DialogContent className="max-w-3xl p-6">
+        <DialogContent className="max-w-none w-[80%] p-6">
           <DialogHeader>
             <DialogTitle>Shopping Bag</DialogTitle>
           </DialogHeader>
