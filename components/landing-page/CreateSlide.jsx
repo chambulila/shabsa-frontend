@@ -1,5 +1,5 @@
 // "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input';
 import Image from 'next/image';
 import { Label } from '../ui/label';
@@ -54,13 +54,14 @@ export default function CreateSlide({ handleClose, refetchData, selectedSlide, s
 
             if (response?.status === 201) {
                 toast.success('Slide created successfully');
+                refetchData();
                 handleClose();
                 setFormData({ title: '', caption: '', image: null });
                 if(selectedSlide) setSelectedSlide(null);
-                refetchData();
             }
             return response;
         } catch (error) {
+            console.error("Failed to create slide:", error);
             toast.error('Error occured while creating slide');
         } finally {
             setCreatingSlide(false);

@@ -23,15 +23,15 @@ export function Carousel({
 
   const next = React.useCallback(() => {
     setCurrentIndex((currentIndex) =>
-      currentIndex === children.length - 1 ? 0 : currentIndex + 1
+      currentIndex === children?.length - 1 ? 0 : currentIndex + 1
     )
-  }, [children.length])
+  }, [children?.length])
 
   const previous = React.useCallback(() => {
     setCurrentIndex((currentIndex) =>
-      currentIndex === 0 ? children.length - 1 : currentIndex - 1
+      currentIndex === 0 ? children?.length - 1 : currentIndex - 1
     )
-  }, [children.length])
+  }, [children?.length])
 
   React.useEffect(() => {
     if (!isAutoPlaying) return
@@ -55,7 +55,7 @@ export function Carousel({
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
-        {children.map((child, index) => (
+        {children?.map((child, index) => (
           <div
             key={index}
             className="w-full h-full flex-shrink-0"
@@ -80,7 +80,7 @@ export function Carousel({
         <ChevronRight className="h-6 w-6" />
       </button>
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {children.map((_, index) => (
+        {children?.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}

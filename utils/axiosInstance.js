@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Cookies from "js-cookie";
 const api = axios.create({
-  baseURL: `https://shabsa.eportsolutions.co.tz/api`,
-  //  baseURL: 'http://localhost:8000/api', // Laravel backend URL
+  // baseURL: `https://shabsa.eportsolutions.co.tz/api`,
+   baseURL: 'http://localhost:8000/api', // Laravel backend URL
   //  baseURL: 'http://api.shabsa.co.tz/api', // Laravel backend URL
 //   headers: {
 //     'Content-Type': 'application/json',  
