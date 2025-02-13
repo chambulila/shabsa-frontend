@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../dialog'
 import Cart from '@/components/cart/Cart'
 import Cookies from 'js-cookie'
 import { useCart } from '@/contexts/cartContext'
+import TopBar from './top-bar'
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -37,6 +38,8 @@ export default function Header() {
   return (
     <header className=" bg-[#daa917] text-black sticky top-0 z-50">
       {/* bg-[#030f27] */}
+      <TopBar />
+
       <nav className="container mx-auto px-4" aria-label="Top">
         <div className="flex items-center justify-between h-16">
           <div className="hidden md:flex gap-8">

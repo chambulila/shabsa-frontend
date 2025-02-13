@@ -29,7 +29,6 @@ export default function RootLayout({ children }) {
         <AuthProvider>
         {/* <div className="bg-gradient-to-b from-yellow-900 via-gray-900 to-yellow-900 text-white min-h-screen"> */}
         <div className="bg-white min-h-screen"> {/* Gradient background */}
-          <TopBar />
           <Header />
           {children}
         </div>

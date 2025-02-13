@@ -10,7 +10,7 @@ export default function TopBar() {
         <div className="text-2xl flex items-center gap-3 font-bold mb-2 md:mb-0">
           <span>
             {/* <Avatar> */}
-            <Image src={'/logo1.png'} alt=''  width={75} height={50} className="" objectFit='rounded' />
+            <Image src={'/logo1.png'} alt=''  width={85} height={50} className="" objectFit='rounded' />
             {/* </Avatar> */}
           </span>
           {/* <span>Shabsa</span> */}
