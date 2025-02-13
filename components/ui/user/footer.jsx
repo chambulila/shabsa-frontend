@@ -46,7 +46,9 @@ export default function Footer() {
                 <Youtube className="h-5 w-5" />
               </Button>
               <Button size="icon" variant="ghost" className="hover:text-[#FDB813]">
-                <Instagram className="h-5 w-5" />
+                <a href="https://www.instagram.com/shabsa_ceramic_tz/">
+                  <Instagram className="h-5 w-5" target='blank' />
+                </a>
               </Button>
             </div>
           </div>
